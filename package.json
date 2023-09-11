@@ -1,0 +1,37 @@
+{
+  "name": "agrovalor-server-teste",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
+    "lint": "eslint ./src  --ext .ts",
+    "lint:fix": "eslint ./src  --ext .ts --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.6.0",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "prettier": "^2.8.8",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.2.2"
+  },
+  "paths": {
+    "@config/*": [
+      "src/config/*"
+    ],
+    "@modules/*": [
+      "src/modules/*"
+    ],
+    "@shared/*": [
+      "src/shared/*"
+    ]
+  }
+}
