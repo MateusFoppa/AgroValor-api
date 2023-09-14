@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+import { dataSource } from '../typeorm';
 import express from 'express';
 import cors from 'cors';
 import routes from './routes';
@@ -12,6 +14,8 @@ app.use(routes);
 
 app.use(errorHandlerMiddleware);
 
-app.listen(3333, () => {
-  console.log('Server starter o port 3333! 👍');
+dataSource.initialize().then(() => {
+  app.listen(3333, () => {
+    console.log('Server starter o port 3333! 👍');
+  });
 });
