@@ -17,7 +17,7 @@ class CreatePropertyService {
 
   public async execute({
     name,
-    user_id,
+    // user_id,
     total_area,
     cultivated_area,
     city,
@@ -31,7 +31,7 @@ class CreatePropertyService {
 
     const property = await this.propertyRepository.create({
       name,
-      user_id,
+      // user_id,
       total_area,
       cultivated_area,
       city,

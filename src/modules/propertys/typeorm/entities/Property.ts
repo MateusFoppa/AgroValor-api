@@ -16,9 +16,6 @@ class Property implements IProperty {
   @Column()
   name: string;
 
-  @Column({ nullable: true })
-  user_id: string;
-
   @Column()
   total_area: number;
 

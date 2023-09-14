@@ -3,8 +3,8 @@ import Property from '../entities/Property';
 import { dataSource } from '@shared/typeorm';
 import { IUpdateProperty } from '@modules/propertys/domain/models/IUpdateProperty';
 import { ICreateProperty } from '@modules/propertys/domain/models/ICreateProperty';
-
-class PropertyRepository {
+import IPropertyRepository from '@modules/propertys/domain/repositories/IPropertyRepository';
+class PropertyRepository implements IPropertyRepository {
   private ormRepository: Repository<Property>;
 
   constructor() {
@@ -12,7 +12,6 @@ class PropertyRepository {
   }
   public async create({
     name,
-    user_id,
     total_area,
     cultivated_area,
     city,
@@ -20,7 +19,6 @@ class PropertyRepository {
   }: ICreateProperty): Promise<Property> {
     const property = this.ormRepository.create({
       name,
-      user_id,
       total_area,
       cultivated_area,
       city,
