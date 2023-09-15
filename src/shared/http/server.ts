@@ -4,6 +4,9 @@ import express from 'express';
 import cors from 'cors';
 import routes from './routes';
 import errorHandlerMiddleware from './middlewares/error-handler';
+import 'express-async-errors';
+import '@shared/typeorm';
+import '@shared/container';
 
 const app = express();
 
@@ -15,7 +18,7 @@ app.use(routes);
 app.use(errorHandlerMiddleware);
 
 dataSource.initialize().then(() => {
-  app.listen(3333, () => {
-    console.log('Server starter o port 3333! 👍');
+  app.listen(3000, () => {
+    console.log('Server starter o port 3000! 👍');
   });
 });
