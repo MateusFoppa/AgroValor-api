@@ -1,5 +1,5 @@
 import { container } from 'tsyringe';
-import IPropertyRepository from '@modules/propertys/domain/repositories/IPropertyRepository';
+import { IPropertyRepository } from '@modules/propertys/domain/repositories/IPropertyRepository';
 import PropertyRepository from '@modules/propertys/infra/typeorm/repositories/PropertyRepository';
 import { IUserTokensRepository } from '@modules/users/domain/repositories/IUserTokensRepository';
 import { IUsersRepository } from '@modules/users/domain/repositories/IUsersRepository';

@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import CreatePropertyService from '@modules/propertys/services/CreatePropertyService';
 import ListPropertyService from '@modules/propertys/services/ListPropertyService';
 
-export default class ProductsController {
+export default class PropertyController {
   public async listAll(
     request: Request,
     response: Response,
@@ -21,8 +21,9 @@ export default class ProductsController {
     const { name, total_area, cultivated_area, city, state } = request.body;
     const user_id = request.user.id;
 
-    const createProperty = container.resolve(CreatePropertyService);
-    const property = await createProperty.execute({
+    const CreateProperty = container.resolve(CreatePropertyService);
+
+    const property = await CreateProperty.execute({
       name,
       user_id,
       total_area,
