@@ -5,6 +5,7 @@ import CreatePropertyService from '@modules/propertys/services/CreatePropertySer
 import ListPropertyService from '@modules/propertys/services/ListPropertyService';
 import showPropertyService from '@modules/propertys/services/ShowPropertyService';
 import UpdatePropertyService from '@modules/propertys/services/updatePropertyService';
+import DeletePropertyService from '@modules/propertys/services/DeletePropertyService';
 
 export default class PropertyController {
   public async listAll(
@@ -66,5 +67,15 @@ export default class PropertyController {
     });
 
     return response.json(property);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const deleteProperty = container.resolve(DeletePropertyService);
+
+    await deleteProperty.execute({ id });
+
+    return response.sendStatus(StatusCodes.NO_CONTENT);
   }
 }
