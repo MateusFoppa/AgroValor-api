@@ -1,25 +1,10 @@
 import 'reflect-metadata';
-import { dataSource } from '../typeorm';
-import express from 'express';
-import cors from 'cors';
-import routes from './routes';
-import errorHandlerMiddleware from './middlewares/error-handler';
-import 'express-async-errors';
-import '@shared/infra/typeorm';
-import '@shared/container';
 import 'dotenv/config';
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
-app.use(routes);
-
-app.use(errorHandlerMiddleware);
+import { dataSource } from '../typeorm';
+import app from './app';
 
 dataSource.initialize().then(() => {
-  app.listen(3000, () => {
-    console.log('Server starter o port 3000! 👍');
+  app.listen(process.env.PORT || 3000, () => {
+    console.log(`Server started on port ${process.env.PORT || 3000}! 🏆`);
   });
 });
