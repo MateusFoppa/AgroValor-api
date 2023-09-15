@@ -1,11 +1,9 @@
-import 'reflect-metadata';
-import { dataSource } from '../typeorm';
 import express from 'express';
 import cors from 'cors';
 import routes from './routes';
 import errorHandlerMiddleware from './middlewares/error-handler';
 import 'express-async-errors';
-import '@shared/typeorm';
+import '@shared/infra/typeorm';
 import '@shared/container';
 
 const app = express();
@@ -17,8 +15,4 @@ app.use(routes);
 
 app.use(errorHandlerMiddleware);
 
-dataSource.initialize().then(() => {
-  app.listen(3000, () => {
-    console.log('Server starter o port 3000! 👍');
-  });
-});
+export default app;
