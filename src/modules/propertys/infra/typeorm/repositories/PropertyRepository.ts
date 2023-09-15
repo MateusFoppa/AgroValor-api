@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm';
 import Property from '../entities/Property';
-import { dataSource } from '@shared/typeorm';
+import { dataSource } from '@shared/infra/typeorm';
 import { IUpdateProperty } from '@modules/propertys/domain/models/IUpdateProperty';
 import { ICreateProperty } from '@modules/propertys/domain/models/ICreateProperty';
 import IPropertyRepository from '@modules/propertys/domain/repositories/IPropertyRepository';

@@ -5,7 +5,7 @@ import cors from 'cors';
 import routes from './routes';
 import errorHandlerMiddleware from './middlewares/error-handler';
 import 'express-async-errors';
-import '@shared/typeorm';
+import '@shared/infra/typeorm';
 import '@shared/container';
 
 const app = express();
