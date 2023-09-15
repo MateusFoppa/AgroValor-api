@@ -3,7 +3,8 @@ import { ICreateProperty } from '../models/ICreateProperty';
 import { IUpdateProperty } from '../models/IUpdateProperty';
 import { IProperty } from '../models/IProperty';
 
-interface IPropertyRepository {
+export interface IPropertyRepository {
+  findAllOfUser(user_Id: string): unknown;
   create(data: ICreateProperty): Promise<IProperty>;
   save(property: IProperty): Promise<IProperty>;
   remove(property: IProperty): Promise<void>;
@@ -11,5 +12,3 @@ interface IPropertyRepository {
   findByName(name: string): Promise<IProperty | null>;
   findById(id: string): Promise<IProperty | null>;
 }
-
-export default IPropertyRepository;
