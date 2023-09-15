@@ -7,6 +7,7 @@ import errorHandlerMiddleware from './middlewares/error-handler';
 import 'express-async-errors';
 import '@shared/infra/typeorm';
 import '@shared/container';
+import 'dotenv/config';
 
 const app = express();
 
