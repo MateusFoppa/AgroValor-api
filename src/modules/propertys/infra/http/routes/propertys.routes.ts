@@ -10,5 +10,6 @@ propertyRouter.get('/user', propertyController.listAll);
 propertyRouter.post('/', propertyController.create);
 propertyRouter.get('/user/:id', propertyController.show);
 propertyRouter.put('/:id', propertyController.update);
+propertyRouter.delete('/:id', propertyController.delete);
 
 export default propertyRouter;
