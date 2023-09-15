@@ -5,6 +5,7 @@ import { IUpdateProperty } from '@modules/propertys/domain/models/IUpdatePropert
 import { ICreateProperty } from '@modules/propertys/domain/models/ICreateProperty';
 import { IPropertyRepository } from '@modules/propertys/domain/repositories/IPropertyRepository';
 import { IPropertyAllOfUser } from '@modules/propertys/domain/models/IPropertyAllOfUser';
+import { IProperty } from '@modules/propertys/domain/models/IProperty';
 class PropertyRepository implements IPropertyRepository {
   private ormRepository: Repository<Property>;
 
