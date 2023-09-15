@@ -3,7 +3,8 @@ import Property from '../entities/Property';
 import { dataSource } from '@shared/infra/typeorm';
 import { IUpdateProperty } from '@modules/propertys/domain/models/IUpdateProperty';
 import { ICreateProperty } from '@modules/propertys/domain/models/ICreateProperty';
-import IPropertyRepository from '@modules/propertys/domain/repositories/IPropertyRepository';
+import { IPropertyRepository } from '@modules/propertys/domain/repositories/IPropertyRepository';
+import { IPropertyAllOfUser } from '@modules/propertys/domain/models/IPropertyAllOfUser';
 class PropertyRepository implements IPropertyRepository {
   private ormRepository: Repository<Property>;
 
@@ -12,6 +13,7 @@ class PropertyRepository implements IPropertyRepository {
   }
   public async create({
     name,
+    user_id,
     total_area,
     cultivated_area,
     city,
@@ -19,6 +21,7 @@ class PropertyRepository implements IPropertyRepository {
   }: ICreateProperty): Promise<Property> {
     const property = this.ormRepository.create({
       name,
+      user_id,
       total_area,
       cultivated_area,
       city,
@@ -44,9 +47,36 @@ class PropertyRepository implements IPropertyRepository {
     await this.ormRepository.save(products);
   }
 
+  public async findAllOfUser(user_Id: string): Promise<IPropertyAllOfUser> {
+    const properties = await this.ormRepository
+      .createQueryBuilder('propertys')
+      .where('propertys.user_id = :user_Id', { user_Id })
+      .getMany();
+
+    const result = {
+      data: properties,
+    };
+
+    return result;
+  }
+
   public async findByName(name: string): Promise<Property | null> {
     const property = this.ormRepository.findOneBy({
       name,
+    });
+
+    return property;
+  }
+
+  public async findByIds(
+    user_id: string,
+    id: string,
+  ): Promise<IProperty | null> {
+    const property = await this.ormRepository.findOne({
+      where: {
+        user_id,
+        id,
+      },
     });
 
     return property;

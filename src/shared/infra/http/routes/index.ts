@@ -7,7 +7,7 @@ import { Router } from 'express';
 const routes = Router();
 
 routes.use('/property', propertyRouter);
-routes.use('/users', usersRouter);
+routes.use('/user', usersRouter);
 routes.use('/sessions', sessionsRouter);
 routes.use('/profile', profileRouter);
 

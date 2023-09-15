@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreatePropertys1694697490262 implements MigrationInterface {
+export class CreateUserToken1694797035013 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'propertys',
+        name: 'user_tokens',
         columns: [
           {
             name: 'id',
@@ -14,24 +14,14 @@ export class CreatePropertys1694697490262 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'name',
-            type: 'varchar',
+            name: 'token',
+            type: 'uuid',
+            generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()',
           },
           {
-            name: 'total_area',
-            type: 'int',
-          },
-          {
-            name: 'cultivated_area',
-            type: 'int',
-          },
-          {
-            name: 'city',
-            type: 'varchar',
-          },
-          {
-            name: 'state',
-            type: 'varchar',
+            name: 'user_id',
+            type: 'uuid',
           },
           {
             name: 'created_at',
@@ -43,10 +33,15 @@ export class CreatePropertys1694697490262 implements MigrationInterface {
             type: 'timestamp with time zone',
             default: 'now()',
           },
+        ],
+        foreignKeys: [
           {
-            name: 'user_id',
-            type: 'uuid',
-            isNullable: true,
+            name: 'TokenUser',
+            referencedTableName: 'users',
+            referencedColumnNames: ['id'],
+            columnNames: ['user_id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
           },
         ],
       }),
@@ -54,6 +49,6 @@ export class CreatePropertys1694697490262 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('propertys');
+    await queryRunner.dropTable('user_tokens');
   }
 }

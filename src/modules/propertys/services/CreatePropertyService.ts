@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import { ICreateProperty } from '../domain/models/ICreateProperty';
-import IPropertyRepository from '../domain/repositories/IPropertyRepository';
+import { IPropertyRepository } from '../domain/repositories/IPropertyRepository';
 import { IProperty } from '../domain/models/IProperty';
 
 @injectable()
@@ -17,7 +17,7 @@ class CreatePropertyService {
 
   public async execute({
     name,
-    // user_id,
+    user_id,
     total_area,
     cultivated_area,
     city,
@@ -31,7 +31,7 @@ class CreatePropertyService {
 
     const property = await this.propertyRepository.create({
       name,
-      // user_id,
+      user_id,
       total_area,
       cultivated_area,
       city,
