@@ -13,6 +13,7 @@ class PropertyRepository implements IPropertyRepository {
   }
   public async create({
     name,
+    user_id,
     total_area,
     cultivated_area,
     city,
@@ -20,6 +21,7 @@ class PropertyRepository implements IPropertyRepository {
   }: ICreateProperty): Promise<Property> {
     const property = this.ormRepository.create({
       name,
+      user_id,
       total_area,
       cultivated_area,
       city,

@@ -1,9 +1,12 @@
 import { IProperty } from '@modules/propertys/domain/models/IProperty';
-// import User from '@modules/user/infra/typeorm/entities/User';
+import User from '@modules/users/infra/typeorm/entities/User';
+
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -15,6 +18,13 @@ class Property implements IProperty {
 
   @Column()
   name: string;
+
+  @Column({ nullable: true })
+  user_id: string;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
   @Column()
   total_area: number;

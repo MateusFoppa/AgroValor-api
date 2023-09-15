@@ -19,10 +19,12 @@ export default class ProductsController {
 
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, total_area, cultivated_area, city, state } = request.body;
+    const user_id = request.user.id;
 
     const createProperty = container.resolve(CreatePropertyService);
     const property = await createProperty.execute({
       name,
+      user_id,
       total_area,
       cultivated_area,
       city,
