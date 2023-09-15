@@ -68,6 +68,20 @@ class PropertyRepository implements IPropertyRepository {
     return property;
   }
 
+  public async findByIds(
+    user_id: string,
+    id: string,
+  ): Promise<IProperty | null> {
+    const property = await this.ormRepository.findOne({
+      where: {
+        user_id,
+        id,
+      },
+    });
+
+    return property;
+  }
+
   public async findById(id: string): Promise<Property | null> {
     const property = this.ormRepository.findOneBy({ id });
 
