@@ -8,5 +8,6 @@ propertyRouter.use(isAuthenticated);
 
 propertyRouter.get('/user', propertyController.listAll);
 propertyRouter.post('/', propertyController.create);
+propertyRouter.get('/user/:id', propertyController.show);
 
 export default propertyRouter;

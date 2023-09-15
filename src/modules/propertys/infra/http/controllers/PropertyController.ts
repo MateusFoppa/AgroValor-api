@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 import { StatusCodes } from 'http-status-codes';
 import CreatePropertyService from '@modules/propertys/services/CreatePropertyService';
 import ListPropertyService from '@modules/propertys/services/ListPropertyService';
+import showPropertyService from '@modules/propertys/services/ShowPropertyService';
 
 export default class PropertyController {
   public async listAll(
@@ -33,5 +34,16 @@ export default class PropertyController {
     });
 
     return response.status(StatusCodes.CREATED).json(property);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const user_id = request.user.id;
+    const property_id = request.params.id;
+
+    const showProperty = container.resolve(showPropertyService);
+
+    const property = await showProperty.execute(user_id, property_id);
+
+    return response.status(StatusCodes.OK).json(property);
   }
 }
