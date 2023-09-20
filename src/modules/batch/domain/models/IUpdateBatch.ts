@@ -1,4 +1,4 @@
-export interface ICreateBatch {
+export interface IUpdateBatch {
   name: string;
   batch_id: string;
   property_id: string;
