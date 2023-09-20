@@ -21,13 +21,13 @@ class CreateBatchService {
     activity,
     geographic_coordinates,
   }: ICreateBatch): Promise<IBatch> {
-    const propertyExists = await this.batchRepository.findByName(
+    const batchExists = await this.batchRepository.findByName(
       name,
       property_id,
     );
 
-    if (propertyExists) {
-      throw new AppError('There is already one property with this name');
+    if (batchExists) {
+      throw new AppError('There is already one bacth with this name');
     }
 
     const batch = await this.batchRepository.create({
