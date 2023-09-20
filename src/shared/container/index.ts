@@ -6,6 +6,8 @@ import { IUsersRepository } from '@modules/users/domain/repositories/IUsersRepos
 import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 import '@modules/users/providers';
+import { IBatchRepository } from '@modules/batch/domain/repositories/IBatchRepository';
+import BatchRepository from '@modules/batch/infra/typeorm/repositories/BatchRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -20,4 +22,9 @@ container.registerSingleton<IUserTokensRepository>(
 container.registerSingleton<IPropertyRepository>(
   'PropertyRepository',
   PropertyRepository,
+);
+
+container.registerSingleton<IBatchRepository>(
+  'BatchRepository',
+  BatchRepository,
 );

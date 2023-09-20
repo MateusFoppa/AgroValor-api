@@ -7,14 +7,14 @@ const batchController = new BatchController();
 
 batchRouter.use(isAuthenticated);
 
-batchRouter.get('/:property_id/area/:area_id', batchController.show);
+batchRouter.get('/:batch_id/property/:property_id', batchController.show);
 
-batchRouter.get('/:property_id', batchController.index);
+batchRouter.get('/property/:property_id', batchController.index);
 
-batchRouter.post('/:property_id', batchController.create);
+batchRouter.post('/property/:property_id', batchController.create);
 
-batchRouter.put('/:property_id/area/:area_id', batchController.update);
+batchRouter.put('/:batch_id/property/:property_id', batchController.update);
 
-batchRouter.delete('/:property_id/area/:area_id', batchController.delete);
+batchRouter.delete('/:batch_id/property/:property_id', batchController.delete);
 
 export default batchRouter;

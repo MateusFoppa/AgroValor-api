@@ -8,9 +8,9 @@ import UpdatePropertyService from '@modules/propertys/services/updatePropertySer
 import DeletePropertyService from '@modules/propertys/services/DeletePropertyService';
 
 interface IRequest extends Request {
-  user: {
-    id: string;
-  };
+  // user: {
+  //   id: string;
+  // };
 }
 export default class PropertyController {
   public async listAll(
