@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 import { ICreateBatch } from '../domain/models/ICreateBatch';
 import { IBatchRepository } from '../domain/repositories/IBatchRepository';
-import { IBatch } from '../domain/models/IBatch';
 import CustomAPIError from '@shared/errors';
+import { IBatch } from '../domain/models/IBatch';
 
 @injectable()
 class CreateBatchService {

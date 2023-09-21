@@ -18,7 +18,7 @@ class DeletePropertyService {
     const product = await this.propertyRepository.findById(id);
 
     if (!product) {
-      throw new CustomAPIError.BadRequestError('Product not found.');
+      throw new CustomAPIError.BadRequestError('Property not found.');
     }
 
     await this.propertyRepository.remove(product);
