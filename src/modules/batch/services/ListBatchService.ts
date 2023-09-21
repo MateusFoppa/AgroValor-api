@@ -1,0 +1,30 @@
+import { inject, injectable } from 'tsyringe';
+import { IBatchRepository } from '../domain/repositories/IBatchRepository';
+import { IListBatch } from '../domain/models/IListBatch';
+import CustomAPIError from '@shared/errors';
+
+@injectable()
+class ListBatchService {
+  constructor(
+    @inject('BatchRepository')
+    private batchRepository: IBatchRepository,
+  ) {
+    if (!batchRepository) {
+      throw new Error('BatchRepository is required.');
+    }
+  }
+
+  public async execute(property_Id: string): Promise<IListBatch> {
+    const batch = await this.batchRepository.findById(property_Id);
+
+    if (!batch) {
+      throw new CustomAPIError.BadRequestError('Property does not exists.');
+    }
+
+    const batchs = await this.batchRepository.findAll(property_Id);
+
+    return batchs;
+  }
+}
+
+export default ListBatchService;

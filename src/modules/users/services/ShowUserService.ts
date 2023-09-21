@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
-import AppError from '@shared/errors/AppError';
 import User from '../infra/typeorm/entities/User';
 import { IShowUser } from '../domain/models/IShowUser';
 import { IUsersRepository } from '../domain/repositories/IUsersRepository';
+import CustomAPIError from '@shared/errors';
 
 @injectable()
 class ShowUserService {
@@ -15,7 +15,7 @@ class ShowUserService {
     const user = await this.usersRepository.findById(id);
 
     if (!user) {
-      throw new AppError('User not found.');
+      throw new CustomAPIError.BadRequestError('User not found.');
     }
 
     return user;
