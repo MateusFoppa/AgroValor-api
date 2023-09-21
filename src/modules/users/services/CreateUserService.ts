@@ -1,10 +1,9 @@
 import { inject, injectable } from 'tsyringe';
-import AppError from '@shared/errors/AppError';
 import { ICreateUser } from '../domain/models/ICreateUser';
 import { IUser } from '../domain/models/IUser';
 import { IUsersRepository } from '../domain/repositories/IUsersRepository';
 import { IHashProvider } from '../providers/HashProvider/models/IHashPovider';
-
+import CustomAPIError from '@shared/errors';
 @injectable()
 class CreateUserService {
   constructor(
@@ -18,7 +17,7 @@ class CreateUserService {
     const emailExists = await this.usersRepository.findByEmail(email);
 
     if (emailExists) {
-      throw new AppError('Email address already used.');
+      throw new CustomAPIError.BadRequestError('Email address already used.');
     }
 
     const hashedPassword = await this.hashProvider.generateHash(password);

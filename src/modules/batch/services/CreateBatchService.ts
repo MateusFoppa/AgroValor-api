@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
-import AppError from '@shared/errors/AppError';
 import { ICreateBatch } from '../domain/models/ICreateBatch';
 import { IBatchRepository } from '../domain/repositories/IBatchRepository';
 import { IBatch } from '../domain/models/IBatch';
+import CustomAPIError from '@shared/errors';
 
 @injectable()
 class CreateBatchService {
@@ -27,7 +27,9 @@ class CreateBatchService {
     );
 
     if (batchExists) {
-      throw new AppError('There is already one bacth with this name');
+      throw new CustomAPIError.BadRequestError(
+        'There is already one bacth with this name',
+      );
     }
 
     const batch = await this.batchRepository.create({

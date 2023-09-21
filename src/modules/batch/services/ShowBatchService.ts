@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 import { IBatchRepository } from '../domain/repositories/IBatchRepository';
-import { BadRequestError } from '@shared/errors/bad-request';
 import { IBatch } from '../domain/models/IBatch';
 import { IShowBatch } from '../domain/models/IShowBatch';
+import CustomAPIError from '@shared/errors';
 
 @injectable()
 class ShowBatchService {
@@ -20,7 +20,7 @@ class ShowBatchService {
   }: IShowBatch): Promise<IBatch | null> {
     const batch = await this.batchRepository.findByIds(property_id, batch_id);
     if (!batch) {
-      throw new BadRequestError('Property or Batch not exist.');
+      throw new CustomAPIError.BadRequestError('Property or Batch not exist.');
     }
 
     return batch;
