@@ -32,6 +32,8 @@ export default class PropertyController {
     const { name, total_area, cultivated_area, city, state } = request.body;
     const user_id = request.user.id;
 
+    console.log(request);
+
     const CreateProperty = container.resolve(CreatePropertyService);
 
     const property = await CreateProperty.execute({
