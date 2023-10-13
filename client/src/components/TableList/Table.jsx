@@ -2,18 +2,11 @@
 export default function TableList(){
 
   return (
-    <div className="flex-1 h-full w-full pl-4 ml-4 p-4">
-      <div className="flex-1 h-full w-full pl-4 ml-4 p-4">
-      <div className="flex-1 h-full w-full pl-4 ml-4 p-4">
-      <div className="flex-1 h-full w-full pl-4 ml-4 p-4">
-      <div className="flex-1 h-full w-full pl-4 ml-4 p-4">
-      <div className="flex-1 h-full w-full pl-4 ml-4 p-4">
-      <div className="flex-1 h-full w-full pl-4 ml-4 p-4">
-      <div className="flex-1 h-full w-full pl-4 ml-4 p-4">
+    <div className="w-full mt-32 p-4">
 
-  <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased ml-4">
+  <section className="p-3 sm:p-5 ml-4">
     <div className="mx-auto max-w-screen-xl px-4 lg:px-12 ml-4">
-        <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg">
             <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                 <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center md:space-x-3 flex-shrink-0">
                     <button type="button" id="createProductModalButton" data-modal-target="createProductModal" data-modal-toggle="createProductModal" className="flex items-center justify-center text-white bg-primary-700 bg-green-500 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
@@ -24,7 +17,7 @@ export default function TableList(){
                     </button>
                 </div>
             </div>
-            <div className="overflow-x-auto">
+            <div>
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -299,13 +292,6 @@ export default function TableList(){
         </div>
     </div>
 </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
   </div>
 
   )

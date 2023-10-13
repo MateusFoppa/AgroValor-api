@@ -3,9 +3,11 @@ import Table from "../../components/TableList/Table"
 
 export default function BatchList(){
   return(
-    <div>
+    <div className="bg-slate-600 grid grid-cols-7 h-full">
+      <div className="col-span-1 h-full">
       <SideBar />
-      <div className="mt-4 p-2">
+      </div>
+      <div className="grid col-span-6 w-full h-screen mx-auto">
       <Table></Table>
       </div>
     </div>
