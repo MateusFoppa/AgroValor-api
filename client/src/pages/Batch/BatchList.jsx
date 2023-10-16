@@ -1,5 +1,6 @@
-import SideBar from "../../components/SideBar/SideBar"
-import Table from "../../components/TableList/Table"
+import FormCrudBatch from "../../components/Batch/FormCrudBatch"
+import SideBar from "../../components/SideBar/SideBar copy"
+
 
 export default function BatchList(){
   return(
@@ -8,7 +9,7 @@ export default function BatchList(){
       <SideBar />
       </div>
       <div className="grid col-span-6 w-full h-screen mx-auto">
-      <Table></Table>
+      <FormCrudBatch></FormCrudBatch>
       </div>
     </div>
   )

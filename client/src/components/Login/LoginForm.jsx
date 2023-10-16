@@ -4,9 +4,9 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 
 export function LoginForm() {
-  const {email, password, setEmail, setPassword, submit} = useContext(UserContext)
+  const {email, password, setEmail, setPassword, submitLogin} = useContext(UserContext)
   return (
-<form onSubmit={submit} className="flex max-w-md flex-col gap-4 w-full px-10 py-2 text-white">
+<form onSubmit={submitLogin} className="flex max-w-md flex-col gap-4 w-full px-10 py-2 text-white">
         <Logo></Logo>
       <div>
         <div className="mb-2 block">

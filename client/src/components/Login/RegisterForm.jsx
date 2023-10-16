@@ -4,12 +4,12 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 
 export function RegisterForm() {
-  const {name, email, password, setName, setEmail, setPassword, submit} = useContext(UserContext)
+  const {name, email, password, setName, setEmail, setPassword, submitRegister} = useContext(UserContext)
 
 
 
   return (
-<form onSubmit={submit} className="flex flex-col gap-4 px-8 py-2 text-white">
+<form onSubmit={submitRegister} className="flex flex-col gap-4 px-8 py-2 text-white">
         <Logo></Logo>
         <div>
         <div className="mb-2 block">

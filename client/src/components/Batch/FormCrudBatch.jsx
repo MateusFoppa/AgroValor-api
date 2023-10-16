@@ -1,29 +1,30 @@
-import { createPropertys, deletePropertys, getPropertys, updatePropertys } from "../../services/api";
+import { createBatch, deletePropertys, getBatch, updateBatch } from "../../services/api";
 import { useEffect, useState } from "react"
 
-export default function FormCrudProperty(){
+export default function FormCrudBatch(){
 
   const[name, setName] = useState("");
-  const[total_area, setTotalArea] = useState("");
-  const[cultivated_area, setCultivatedArea] = useState("");
-  const[city, setCity] = useState("");
-  const[state, setState] = useState("");
+  const[activity, setActivity] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const[geographic_coordinates, setGeographic_coordinates] = useState("");
 
 
-    const [property, setPropertys] = useState([])
+
+
+  const [batch, setBatchs] = useState([])
 
   const handlerCreate = async () => {
-    console.log(name,state,cultivated_area,total_area,city)
+    console.log(name,activity)
     setCreateModalOpen(false);
-    const PropertyRequest = await createPropertys(name,state,cultivated_area,total_area,city)
+    const PropertyRequest = await createBatch(name, activity)
     console.log(PropertyRequest);
   }
 
   const handlerUpdate = async () => {
-    console.log(name,state,cultivated_area,total_area,city)
+    console.log(name,activity, geographic_coordinates)
     setUpdateModalOpen(false);
     console.log(selectProperty)
-    const PropertyRequest = await updatePropertys(selectProperty,name,state,cultivated_area,total_area,city)
+    const PropertyRequest = await updateBatch(selectProperty,name,activity)
     console.log(PropertyRequest)
   }
 
@@ -44,11 +45,7 @@ export default function FormCrudProperty(){
 
     function openUpdateModal(data) {
       setName(data.name);
-      setState(data.state);
-      setTotalArea(data.total_area);
-      setCultivatedArea(data.cultivated_area);
-      setCity(data.city);
-      setSelectProperty(data.id);
+      setActivity(data.activity);
       setUpdateModalOpen(true);
 
     }
@@ -87,19 +84,19 @@ export default function FormCrudProperty(){
   useEffect(() => {
          (async () => {
           try {
-            const PropertyRequest = await getPropertys()
+            const BatchRequest = await getBatch(selectProperty)
 
-            console.log(PropertyRequest)
+            console.log(BatchRequest)
 
-            const requests = [PropertyRequest]
+            const requests = [BatchRequest]
 
             console.log(requests)
 
             const [
-              { data: propertyResponse },
+              { data: batchResponse },
             ] = await Promise.all(requests)
 
-            setPropertys(propertyResponse)
+            setBatchs(batchResponse)
 
           } catch (error) {
             console.error(error)
@@ -107,7 +104,7 @@ export default function FormCrudProperty(){
         })()
       }, [])
 
-      console.log(property)
+      console.log(batch)
 
   return (
     <div className="flex p-4 justify-center items-center">
@@ -120,7 +117,7 @@ export default function FormCrudProperty(){
                         <svg className="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path clipRule="evenodd" fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                         </svg>
-                        Adicionar Propriedade
+                        Adicionar Lote
                     </button>
                 </div>
             </div>
@@ -129,13 +126,9 @@ export default function FormCrudProperty(){
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" className="px-4 py-4">Nome</th>
-                            <th scope="col" className="px-4 py-3">Cidade</th>
-                            <th scope="col" className="px-4 py-3">Estado</th>
-                            <th scope="col" className="px-4 py-3">Area Cultivada</th>
-                            <th scope="col" className="px-4 py-3">Area Total</th>
-                            <th scope="col" className="px-4 py-3">
-                                <span className="sr-only">Actions</span>
-                            </th>
+                            <th scope="col" className="px-4 py-3">Atividade</th>
+                            <th scope="col" className="px-4 py-3">Coordenadas</th>
+
                             <th scope="col" className="px-4 py-3">
                                 <span className="sr-only">Actions</span>
                             </th>
@@ -145,14 +138,13 @@ export default function FormCrudProperty(){
                         </tr>
                     </thead>
                     <tbody>
-                      {property.map((data) => (
+                      {batch.map((data) => (
                         <tr key={data.id} className="border-b dark:border-gray-700">
                             <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <td className="px-4 py-3">{data.name}</td></th>
-                            <td className="px-4 py-3">{data.city}</td>
-                            <td className="px-4 py-3 max-w-[12rem] truncate">{data.state}</td>
-                            <td className="px-4 py-3">{data.cultivated_area}</td>
-                            <td className="px-4 py-3">{data.total_area}</td>
+                            <td className="px-4 py-3">{data.activity}</td>
+                            <td className="px-4 py-3">{data.geographic_coordinates}</td>
+
 
                             <td className="flex-1 m-0 p-3 justify-end">
 
@@ -214,32 +206,20 @@ export default function FormCrudProperty(){
             <form>
             <div className="grid gap-4 mb-4 sm:grid-cols-2">
                     <div>
-                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome da Propriedade</label>
+                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome do Lote</label>
                         <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nome"></input>
                     </div>
 
                     <div>
-                        <label htmlFor="cultivated" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Area Cultivada</label>
-                        <input type="number" value={cultivated_area} onChange={(e) => setCultivatedArea(e.target.value)} name="cultivated" id="cultivated" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Número de ha"></input>
-                    </div>
-                    <div>
-                        <label htmlFor="areatotal" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Area Total</label>
-                        <input type="number" name="areatotal" id="areatotal" value={total_area} onChange={(e) => setTotalArea(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Número de ha"></input>
-                    </div>
-                    <div>
-                        <label htmlFor="city" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cidade</label>
-                        <input type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Sua Cidade"></input>
-                    </div>
-                    <div>
-                        <label htmlFor="state" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado</label>
-                        <input type="text" name="state" id="state" value={state} onChange={(e) => setState(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Seu Estado"></input>
+                        <label htmlFor="activity" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Atividade Agrícola</label>
+                        <input type="text" value={activity} onChange={(e) => setActivity(e.target.value)} name="activity" id="activity" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Atividade do Lote"></input>
                     </div>
                 </div>
                 <button type="button" onClick={handlerCreate} data-modal-target="createProductModal" data-modal-toggle="createProductModal" className="text-white inline-flex items-center bg-teal-500 hover:bg-teal-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                     <svg className="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
                     </svg>
-                    Adicionar Propriedade
+                    Adicionar Lote
                 </button>
             </form>
         </div>
@@ -268,23 +248,11 @@ export default function FormCrudProperty(){
                         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome da Propriedade</label>
                         <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nome"></input>
                     </div>
+                    <div>
+                        <label htmlFor="activity" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Atividade Agrícola</label>
+                        <input type="text" value={activity} onChange={(e) => setActivity(e.target.value)} name="activity" id="activity" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Atividade do Lote"></input>
+                    </div>
 
-                    <div>
-                        <label htmlFor="cultivated" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Area Cultivada</label>
-                        <input type="number" value={cultivated_area} onChange={(e) => setCultivatedArea(e.target.value)} name="cultivated" id="cultivated" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Número de ha"></input>
-                    </div>
-                    <div>
-                        <label htmlFor="areatotal" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Area Total</label>
-                        <input type="number" name="areatotal" id="areatotal" value={total_area} onChange={(e) => setTotalArea(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Número de ha"></input>
-                    </div>
-                    <div>
-                        <label htmlFor="city" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cidade</label>
-                        <input type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Sua Cidade"></input>
-                    </div>
-                    <div>
-                        <label htmlFor="state" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado</label>
-                        <input type="text" name="state" id="state" value={state} onChange={(e) => setState(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Seu Estado"></input>
-                    </div>
                 </div>
                 <div className="flex items-center space-x-4">
                     <button type="button" onClick={handlerUpdate} className="text-white bg-teal-500 hover:bg-teal-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Salvar</button>

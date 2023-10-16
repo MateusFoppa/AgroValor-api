@@ -33,7 +33,7 @@ export const UserProvider = ({ children }) => {
       const { user, token } = response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      navigate('/')
+      navigate('/property')
     } catch (error) {
       console.error('Error:', error);
     }
@@ -61,13 +61,13 @@ export const UserProvider = ({ children }) => {
     const { user, token } = response.data;
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
-    navigate('/')
+    navigate('/property')
   } catch (error) {
     console.error('Error:', error);
   }
 };
   return (
-    <UserContext.Provider value={{email, password, name, setName, setEmail, setPassword, submitLogin: handleLogin, submitregister: handleRegister}}>
+    <UserContext.Provider value={{email, password, name, setName, setEmail, setPassword, submitLogin: handleLogin, submitRegister: handleRegister}}>
       {children}
     </UserContext.Provider>
   )

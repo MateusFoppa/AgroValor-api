@@ -2,7 +2,7 @@
 export default function TableList(){
 
   return (
-    <div className="w-full mt-32 p-4">
+    <div className="flex-1 mt-32 p-4">
 
   <section className="p-3 sm:p-5 ml-4">
     <div className="mx-auto max-w-screen-xl px-4 lg:px-12 ml-4">
