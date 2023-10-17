@@ -6,12 +6,15 @@ import UserList from "./pages/Users/UserList";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import LandingPage from "./pages/LandingPage/LandingPage";
+import HomePage from "./pages/Home/home";
+
 
 
 export function AppRoutes() {
    return(
        <Routes>
            <Route path='/' element={<LandingPage />} />
+           <Route path='/home' element={<HomePage />} />
            <Route path='/property' element={<PropertyList />} />
            <Route path='/batch' element={<BatchList />} />
            <Route path='/user' element={<UserList />} />

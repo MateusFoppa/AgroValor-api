@@ -1,14 +1,14 @@
 import FormCrudBatch from "../../components/Batch/FormCrudBatch"
-import SideBar from "../../components/SideBar/SideBar copy"
+import SideBar from "../../components/SideBar/SideBar"
 
 
 export default function BatchList(){
   return(
-    <div className="bg-slate-600 grid grid-cols-7 h-full">
-      <div className="col-span-1 h-full">
+    <div className="bg-slate-600 flex">
+      <div className="h-screen">
       <SideBar />
       </div>
-      <div className="grid col-span-6 w-full h-screen mx-auto">
+      <div className="flex h-screen mx-auto">
       <FormCrudBatch></FormCrudBatch>
       </div>
     </div>

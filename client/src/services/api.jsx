@@ -42,8 +42,18 @@ export const getBatch = async (id) => {
   return response.data;
 };
 
-export const createBatch = async (id, name, activity) => {
+export const createBatch = async (id, name, activity, geographic_coordinates) => {
   const response = await api.post(`/batch/property/${id}`,
+  {
+    name,
+    activity,
+    geographic_coordinates,
+  })
+  return response.data;
+};
+
+export const updateBatch = async (batch_id, property_id, name, activity) => {
+  const response = await api.put(`/batch/${batch_id}/property/${property_id}`,
   {
     name,
     activity,
@@ -51,11 +61,7 @@ export const createBatch = async (id, name, activity) => {
   return response.data;
 };
 
-export const updateBatch = async (id, name, activity) => {
-  const response = await api.put(`/batch/property/${id}`,
-  {
-    name,
-    activity,
-  })
+export const deleteBatch = async (batch_id, property_id) => {
+  const response = await api.delete(`/batch/${batch_id}/property/${property_id}`)
   return response.data;
 };

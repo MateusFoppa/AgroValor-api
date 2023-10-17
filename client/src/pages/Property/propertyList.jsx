@@ -1,4 +1,4 @@
-import SideBar from "../../components/SideBar/SideBar copy"
+import SideBar from "../../components/SideBar/SideBar"
 import FormCrudProperty from "../../components/property/FormCrud"
 
 export default function PropertyList(){
@@ -7,7 +7,7 @@ export default function PropertyList(){
       <div className=" h-screen">
       <SideBar />
       </div>
-      <div className="flex w-full h-screen mx-auto">
+      <div className="flex h-screen mx-auto">
       <FormCrudProperty></FormCrudProperty>
       </div>
     </div>

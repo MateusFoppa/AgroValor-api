@@ -4,9 +4,13 @@ import SideBar from "../../components/SideBar/SideBar";
 
 export default function Home(){
   return(
-    <div>
+    <div className="bg-slate-600 flex">
+      <div className=" h-screen">
       <SideBar />
-      <div className="text-white display-flex"><h1>Conteudo</h1></div>
+      </div>
+      <div className="flex h-screen mx-auto">
+
+      </div>
     </div>
   )
 }

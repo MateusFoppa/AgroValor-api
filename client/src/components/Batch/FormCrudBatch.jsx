@@ -1,33 +1,41 @@
-import { createBatch, deletePropertys, getBatch, updateBatch } from "../../services/api";
-import { useEffect, useState } from "react"
+import { createBatch, deleteBatch, updateBatch } from "../../services/api";
+import { useContext, useState } from "react"
+import { BatchContext } from "../contexts/BatchContext";
 
 export default function FormCrudBatch(){
 
+  const {batch, setBatchState, propertyState} = useContext(BatchContext)
+
   const[name, setName] = useState("");
   const[activity, setActivity] = useState("");
-  // eslint-disable-next-line no-unused-vars
   const[geographic_coordinates, setGeographic_coordinates] = useState("");
 
-
-
-
-  const [batch, setBatchs] = useState([])
+  const handlerState = async (data) => {
+    console.log(JSON.stringify(data.name))
+    localStorage.setItem('StateBatch', JSON.stringify(data));
+    setBatchState(JSON.parse(localStorage.getItem('StateBatch')))
+  }
 
   const handlerCreate = async () => {
     console.log(name,activity)
     setCreateModalOpen(false);
-    const PropertyRequest = await createBatch(name, activity)
+    setGeographic_coordinates("165165165165");
+    const PropertyRequest = await createBatch(propertyState.id, name, activity, geographic_coordinates)
     console.log(PropertyRequest);
   }
 
   const handlerUpdate = async () => {
     console.log(name,activity, geographic_coordinates)
     setUpdateModalOpen(false);
-    console.log(selectProperty)
-    const PropertyRequest = await updateBatch(selectProperty,name,activity)
+    const PropertyRequest = await updateBatch(selectBatch, propertyState.id,name,activity)
     console.log(PropertyRequest)
   }
 
+  async function handlerDelete() {
+    setDeleteModalOpen(false);
+    const PropertyRequest = await deleteBatch(selectBatch, propertyState.id)
+    console.log(PropertyRequest)
+  }
 
   const [isModalCreateOpen, setCreateModalOpen] = useState(false);
 
@@ -41,13 +49,13 @@ export default function FormCrudBatch(){
   }
 
     const [isModalUpdateOpen, setUpdateModalOpen] = useState(false);
-    const [selectProperty, setSelectProperty] = useState("");
+    const [selectBatch, setSelectBatch] = useState("");
 
     function openUpdateModal(data) {
       setName(data.name);
       setActivity(data.activity);
+      setSelectBatch(data.id);
       setUpdateModalOpen(true);
-
     }
 
     function closeUpdateModal() {
@@ -67,44 +75,13 @@ export default function FormCrudBatch(){
     const [isModalDeleteOpen, setDeleteModalOpen] = useState(false);
 
     function openDeleteModal(id) {
-      setSelectProperty(id);
+      setSelectBatch(id);
       setDeleteModalOpen(true);
     }
 
     function closeDeleteModal() {
       setDeleteModalOpen(false);
     }
-
-    async function handlerDelete() {
-      setDeleteModalOpen(false);
-      const PropertyRequest = await deletePropertys(selectProperty)
-      console.log(PropertyRequest)
-    }
-
-  useEffect(() => {
-         (async () => {
-          try {
-            const BatchRequest = await getBatch(selectProperty)
-
-            console.log(BatchRequest)
-
-            const requests = [BatchRequest]
-
-            console.log(requests)
-
-            const [
-              { data: batchResponse },
-            ] = await Promise.all(requests)
-
-            setBatchs(batchResponse)
-
-          } catch (error) {
-            console.error(error)
-          }
-        })()
-      }, [])
-
-      console.log(batch)
 
   return (
     <div className="flex p-4 justify-center items-center">
@@ -141,6 +118,9 @@ export default function FormCrudBatch(){
                       {batch.map((data) => (
                         <tr key={data.id} className="border-b dark:border-gray-700">
                             <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <td>
+                              <input onClick={()=>handlerState(data)} type="radio" name="checbox"></input>
+                              </td>
                             <td className="px-4 py-3">{data.name}</td></th>
                             <td className="px-4 py-3">{data.activity}</td>
                             <td className="px-4 py-3">{data.geographic_coordinates}</td>

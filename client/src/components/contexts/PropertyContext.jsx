@@ -5,8 +5,11 @@ import { createContext, useEffect, useState } from 'react'
 
 export const PropertyContext = createContext({})
 
-export function PropertyProvider(children) {
+// eslint-disable-next-line react/prop-types
+export function PropertyProvider({children}) {
   const [property, setPropertys] = useState([])
+  const [propertyState, setPropertyState] = useState(JSON.parse(localStorage.getItem('StateProperty')) || "");
+
 
 
   useEffect(() => {
@@ -34,7 +37,7 @@ export function PropertyProvider(children) {
 
 
   return (
-    <PropertyContext.Provider value={{ property }}>
+    <PropertyContext.Provider value={{ property, propertyState, setPropertyState }}>
       {children}
     </PropertyContext.Provider>
   )
