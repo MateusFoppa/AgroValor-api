@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { ICreateExpenses } from '../models/ICreateExpenses';
 import { IExpenses } from '../models/IExpenses';
-import { IListExpenses } from '../models/iListExpenses';
+import { IListExpenses } from '../models/IListExpenses';
 
 export interface IExpensesRepository {
   findAll(batch_id: string): Promise<IListExpenses>;

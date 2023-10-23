@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import Expenses from '../entities/Expense';
 import { IExpensesRepository } from '@modules/expenses/domain/repositories/IExpensesRepository';
 import { dataSource } from '@shared/infra/typeorm';
-import { IListExpenses } from '@modules/expenses/domain/models/iListExpenses';
+import { IListExpenses } from '@modules/expenses/domain/models/IListExpenses';
 import { IExpenses } from '@modules/expenses/domain/models/IExpenses';
 import { ICreateExpenses } from '@modules/expenses/domain/models/ICreateExpenses';
 
