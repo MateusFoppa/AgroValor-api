@@ -19,12 +19,9 @@ class ExpensesRepository implements IExpensesRepository {
     return result;
   }
 
-  public async findByName(
-    name: string,
-    batch_id: string,
-  ): Promise<IExpenses | null> {
+  public async findByName(batch_id: string): Promise<IExpenses | null> {
     const expense = await this.ormRepository.findOne({
-      where: { name, batch_id },
+      where: { batch_id },
     });
     return expense || null;
   }

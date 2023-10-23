@@ -16,9 +16,6 @@ class Expenses implements IExpenses {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  name: string;
-
   @Column({ nullable: true })
   batch_id: string;
 
@@ -50,7 +47,7 @@ class Expenses implements IExpenses {
   updated_at: Date;
 
   @ManyToOne(() => Batch)
-  @JoinColumn({ name: 'property_id' })
+  @JoinColumn({ name: 'batch_id' })
   batch: Batch;
 }
 
