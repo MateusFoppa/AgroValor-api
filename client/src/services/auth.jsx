@@ -1,9 +1,6 @@
 let isAuthenticated = false;
 
-export const setAuth = (token) => {
-  isAuthenticated = !!token;
-}
-
 export const isAuth = () => {
+  isAuthenticated = !!localStorage.getItem('token');
   return isAuthenticated;
 }

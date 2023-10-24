@@ -1,5 +1,4 @@
 import axios from "axios";
-import { setAuth } from "../../services/auth";
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -34,7 +33,6 @@ export const UserProvider = ({ children }) => {
       const { user, token } = response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      setAuth(token);
       navigate('/property')
     } catch (error) {
       console.error('Error:', error);
