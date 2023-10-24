@@ -1,4 +1,5 @@
 import CreateExpenseService from '@modules/expenses/services/CreateExpenseService';
+import DeleteExpenseService from '@modules/expenses/services/DeleteExpenseService';
 import ListExpenseService from '@modules/expenses/services/ListExpenseService';
 import UpdateExpenseService from '@modules/expenses/services/UpdateExpenseService';
 import { Request, Response } from 'express';
@@ -71,5 +72,16 @@ export default class ExpenseController {
     });
 
     return response.status(StatusCodes.OK).json(expense);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const expenses_id = request.params.expense_id;
+    const batch_id = request.params.batch_id;
+
+    const deleteexpense = container.resolve(DeleteExpenseService);
+
+    await deleteexpense.execute({ expenses_id, batch_id });
+
+    return response.sendStatus(StatusCodes.NO_CONTENT);
   }
 }
