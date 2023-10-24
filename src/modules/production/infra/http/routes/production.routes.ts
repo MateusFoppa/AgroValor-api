@@ -7,7 +7,7 @@ const productionController = new ProductionController();
 
 productionRouter.use(isAuthenticated);
 
-// productionRouter.get('/batch/:batch_id', productionController.index);
+productionRouter.get('/batch/:batch_id', productionController.index);
 productionRouter.post('/batch/:batch_id', productionController.create);
 // productionRouter.put(
 //   '/:production_id/batch/:batch_id',
