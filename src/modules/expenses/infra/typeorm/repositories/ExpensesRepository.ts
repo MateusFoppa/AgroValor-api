@@ -36,9 +36,9 @@ class ExpensesRepository implements IExpensesRepository {
     return expense;
   }
 
-  public async findById(id: string): Promise<IExpenses | null> {
+  public async findById(batch_id: string): Promise<IExpenses | null> {
     const expense = await this.ormRepository.findOneBy({
-      id,
+      batch_id,
     });
     return expense;
   }
