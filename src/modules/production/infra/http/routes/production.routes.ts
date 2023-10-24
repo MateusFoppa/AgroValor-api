@@ -9,10 +9,10 @@ productionRouter.use(isAuthenticated);
 
 productionRouter.get('/batch/:batch_id', productionController.index);
 productionRouter.post('/batch/:batch_id', productionController.create);
-// productionRouter.put(
-//   '/:production_id/batch/:batch_id',
-//   productionController.update,
-// );
+productionRouter.put(
+  '/:production_id/batch/:batch_id',
+  productionController.update,
+);
 // productionRouter.delete(
 //   '/:production_id/batch/:batch_id',
 //   productionController.delete,
