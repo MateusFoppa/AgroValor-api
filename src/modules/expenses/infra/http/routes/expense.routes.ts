@@ -11,5 +11,6 @@ expenseRouter.get('/batch/:batch_id', expenseController.index);
 expenseRouter.post('/batch/:batch_id', expenseController.create);
 expenseRouter.put('/:expense_id/batch/:batch_id', expenseController.update);
 expenseRouter.delete('/:expense_id/batch/:batch_id', expenseController.delete);
+expenseRouter.get('/:expense_id/batch/:batch_id', expenseController.show);
 
 export default expenseRouter;

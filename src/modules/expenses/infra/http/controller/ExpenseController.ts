@@ -1,6 +1,7 @@
 import CreateExpenseService from '@modules/expenses/services/CreateExpenseService';
 import DeleteExpenseService from '@modules/expenses/services/DeleteExpenseService';
 import ListExpenseService from '@modules/expenses/services/ListExpenseService';
+import ShowExpenseService from '@modules/expenses/services/ShowExpenseService';
 import UpdateExpenseService from '@modules/expenses/services/UpdateExpenseService';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
@@ -70,6 +71,16 @@ export default class ExpenseController {
       value_total,
       data_pgto,
     });
+
+    return response.status(StatusCodes.OK).json(expense);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const expenses_id = request.params.expense_id;
+    const batch_id = request.params.batch_id;
+    const showExpense = container.resolve(ShowExpenseService);
+
+    const expense = await showExpense.execute({ expenses_id, batch_id });
 
     return response.status(StatusCodes.OK).json(expense);
   }
