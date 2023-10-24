@@ -65,3 +65,115 @@ export const deleteBatch = async (batch_id, property_id) => {
   const response = await api.delete(`/batch/${batch_id}/property/${property_id}`)
   return response.data;
 };
+
+export const getExpense = async (batch_id) => {
+  const response = await api.get(`expense/batch/${batch_id}`)
+  return response.data;
+};
+
+export const createExpense = async (batch_id, category,
+  item,
+  unit_of,
+  quantity,
+  value_unit,
+  value_total,
+  data_pgto,) => {
+  const response = await api.post(`/expense/batch/${batch_id}`,
+  {
+    category,
+    item,
+    unit_of,
+    quantity,
+    value_unit,
+    value_total,
+    data_pgto,
+  })
+  return response.data;
+};
+
+export const updateExpense = async (
+  batch_id,
+  expense_id,
+  category,
+  item,
+  unit_of,
+  quantity,
+  value_unit,
+  value_total,
+  data_pgto, ) => {
+  const response = await api.put(`/expense/${expense_id}/batch/${batch_id}`,
+  {
+    expense_id,
+    batch_id,
+    category,
+    item,
+    unit_of,
+    quantity,
+    value_unit,
+    value_total,
+    data_pgto,
+  })
+  return response.data;
+};
+
+export const deleteExpense = async (batch_id, expense_id) => {
+  const response = await api.delete(`/expense/${expense_id}/batch/${batch_id}`)
+  return response.data;
+};
+
+export const getProduction = async (batch_id) => {
+  const response = await api.get(`production/batch/${batch_id}`)
+  return response.data;
+};
+
+export const createProduction = async (
+  batch_id,
+  category,
+  item,
+  unit_of,
+  quantity,
+  value_unit,
+  value_total,
+  data_pgto,) => {
+  const response = await api.post(`/production/batch/${batch_id}`,
+  {
+    category,
+    item,
+    unit_of,
+    quantity,
+    value_unit,
+    value_total,
+    data_pgto,
+  })
+  return response.data;
+};
+
+export const updateProduction = async (
+  batch_id,
+  production_id,
+  category,
+  item,
+  unit_of,
+  quantity,
+  value_unit,
+  value_total,
+  data_pgto, ) => {
+  const response = await api.put(`/production/${production_id}/batch/${batch_id}`,
+  {
+    production_id,
+    batch_id,
+    category,
+    item,
+    unit_of,
+    quantity,
+    value_unit,
+    value_total,
+    data_pgto,
+  })
+  return response.data;
+};
+
+export const deleteProduction = async (batch_id, production_id) => {
+  const response = await api.delete(`/production/${production_id}/batch/${batch_id}`)
+  return response.data;
+};
