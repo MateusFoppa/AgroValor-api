@@ -2,7 +2,8 @@ import CreateBatchService from '@modules/batch/services/CreateBatchService';
 import DeleteBatchService from '@modules/batch/services/DeleteBatchService';
 import ListBatchService from '@modules/batch/services/ListBatchService';
 import ShowBatchService from '@modules/batch/services/ShowBatchService';
-import UpdateBatchService from '@modules/batch/services/updateBatchService';
+import UpdateBatchService from '@modules/batch/services/UpdateBatchService';
+
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { container } from 'tsyringe';

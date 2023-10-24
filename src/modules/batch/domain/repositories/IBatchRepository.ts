@@ -6,7 +6,7 @@ import { IListBatch } from '../models/IListBatch';
 export interface IBatchRepository {
   findAll(property_Id: string): Promise<IListBatch>;
   findByName(name: string, property_id: string): Promise<IBatch | null>;
-  findByIds(area_id: string, property_id: string): Promise<IBatch | null>;
+  findByIds(batch_id: string, property_id: string): Promise<IBatch | null>;
   findById(id: string): Promise<IBatch | null>;
   create(data: ICreateBatch): Promise<IBatch>;
   save(batch: IBatch): Promise<IBatch>;
