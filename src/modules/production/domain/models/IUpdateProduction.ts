@@ -1,6 +1,6 @@
 export interface IUpdateProduction {
   batch_id: string;
-  expenses_id: string;
+  production_id: string;
   category: string;
   item: string;
   unit_of: string;
