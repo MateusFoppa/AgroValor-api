@@ -1,4 +1,5 @@
 import CreateProductionService from '@modules/production/services/CreateProductionService';
+import DeleteProductionService from '@modules/production/services/DeleteProductionService';
 import ListProductionService from '@modules/production/services/ListProductionService';
 import ShowProductionService from '@modules/production/services/ShowProductionService';
 import UpdateProductionService from '@modules/production/services/UpdateProductionService';
@@ -85,5 +86,16 @@ export default class ProductionController {
     });
 
     return response.status(StatusCodes.OK).json(production);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const production_id = request.params.production_id;
+    const batch_id = request.params.batch_id;
+
+    const deleteProduction = container.resolve(DeleteProductionService);
+
+    await deleteProduction.execute({ production_id, batch_id });
+
+    return response.sendStatus(StatusCodes.NO_CONTENT);
   }
 }

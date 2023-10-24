@@ -13,10 +13,10 @@ productionRouter.put(
   '/:production_id/batch/:batch_id',
   productionController.update,
 );
-// productionRouter.delete(
-//   '/:production_id/batch/:batch_id',
-//   productionController.delete,
-// );
+productionRouter.delete(
+  '/:production_id/batch/:batch_id',
+  productionController.delete,
+);
 productionRouter.get(
   '/:production_id/batch/:batch_id',
   productionController.show,
