@@ -1,5 +1,6 @@
 import CreateProductionService from '@modules/production/services/CreateProductionService';
 import ListProductionService from '@modules/production/services/ListProductionService';
+import ShowProductionService from '@modules/production/services/ShowProductionService';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { container } from 'tsyringe';
@@ -40,5 +41,18 @@ export default class ProductionController {
     });
 
     return response.status(StatusCodes.CREATED).json(production);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const production_id = request.params.production_id;
+    const batch_id = request.params.batch_id;
+    const showProduction = container.resolve(ShowProductionService);
+
+    const production = await showProduction.execute({
+      production_id,
+      batch_id,
+    });
+
+    return response.status(StatusCodes.OK).json(production);
   }
 }

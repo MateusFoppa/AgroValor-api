@@ -17,9 +17,9 @@ productionRouter.post('/batch/:batch_id', productionController.create);
 //   '/:production_id/batch/:batch_id',
 //   productionController.delete,
 // );
-// productionRouter.get(
-//   '/:production_id/batch/:batch_id',
-//   productionController.show,
-// );
+productionRouter.get(
+  '/:production_id/batch/:batch_id',
+  productionController.show,
+);
 
 export default productionRouter;
