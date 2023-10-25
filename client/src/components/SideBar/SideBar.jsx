@@ -29,7 +29,7 @@ export default function SideBar() {
     <section className="flex gap-6">
       <div
         className={`bg-slate-900 min-h-screen ${
-          open ? "w-72" : "w-16"
+          open ? "w-64" : "w-16"
         } duration-500 text-gray-100 px-4`}
       >
         <div className="py-3 flex flex-wrap">

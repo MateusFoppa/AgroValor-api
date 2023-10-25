@@ -1,3 +1,5 @@
+import TableListExpense from "../../../components/Expense/TableList";
+import { ExpenseProvider } from "../../../components/contexts/ExpenseContext";
 import SideBar from "../../../components/SideBar/SideBar";
 
 
@@ -9,7 +11,9 @@ export default function Expences(){
       </div>
       <div className="flex h-screen mx-auto">
       <div className="flex h-full w-full items-center justify-center text-white">
-        <h1>Lista de Despesas lote selecionado, botão mais</h1>
+        <ExpenseProvider>
+        <TableListExpense></TableListExpense>
+        </ExpenseProvider>
       </div>
       </div>
     </div>

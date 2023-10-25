@@ -1,3 +1,5 @@
+import { ProductionProvider } from "../../../components/contexts/ProductionContext";
+import TableListProduction from "../../../components/Production/TableList";
 import SideBar from "../../../components/SideBar/SideBar";
 
 export default function Production(){
@@ -8,7 +10,9 @@ export default function Production(){
       </div>
       <div className="flex h-screen mx-auto">
       <div className="flex h-full w-full items-center justify-center text-white">
-        <h1>Lista de Produções lote selecionado, botão mais</h1>
+      <ProductionProvider>
+        <TableListProduction></TableListProduction>
+        </ProductionProvider>
       </div>
       </div>
     </div>
