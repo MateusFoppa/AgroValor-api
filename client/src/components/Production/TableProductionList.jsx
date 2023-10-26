@@ -3,6 +3,8 @@ import { ProductionContext } from '../contexts/ProductionContext';
 import CreateProductionModal from './CreateProductionModal';
 import UpdateProductionModal from './UpdateProductionModal';
 import DeleteProductionModal from './DeleteProductionModal';
+import formatData from '../../services/FormatDate';
+
 
 export default function TableProductionList() {
 
@@ -55,7 +57,7 @@ export default function TableProductionList() {
                         <td className="px-4 py-3">{data.quantity}</td>
                         <td className="px-4 py-3">{data.value_unit}</td>
                         <td className="px-4 py-3">{data.value_total}</td>
-                        <td className="px-4 py-3">{data.receipt_date}</td>
+                        <td className="px-4 py-3">{formatData(data.receipt_date)}</td>
 
                         <td className="flex-1 m-0 p-3 justify-end">
 

@@ -1,6 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BatchContext } from "../contexts/BatchContext";
 import { createProduction } from "../../services/api";
+import SelectUnitOf from "../Select/SelectUnitOf";
 
 export default function CreateProductionModal() {
 
@@ -15,6 +16,18 @@ export default function CreateProductionModal() {
   const [unit_of, setUnitOf] = useState("");
   const [value_total, setValueTotal] = useState("");
   const [value_unit, setValueUnit] = useState("");
+
+  useEffect(() => {
+    const calculateTotal = () => {
+      const quantityValue = parseFloat(quantity);
+      const unitValue = parseFloat(value_unit);
+      if (!isNaN(quantityValue) && !isNaN(unitValue)) {
+        const total = quantityValue * unitValue;
+        setValueTotal(total);
+      }
+    };
+    calculateTotal();
+  }, [quantity, value_unit]);
 
   function openCreateModal() {
     setCreateModalOpen(true);
@@ -93,15 +106,9 @@ export default function CreateProductionModal() {
                   </div>
                   <div>
                     <label htmlFor="unit_of" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
-                    <input
-                      type="text"
-                      value={unit_of}
-                      onChange={(e) => setUnitOf(e.target.value)}
-                      name="unit_of"
-                      id="unit_of"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder="Unit de medida"
-                    />
+                    <SelectUnitOf value={setUnitOf} onChange={(e) => {
+                      setUnitOf(e.target.value)
+                    }} />
                   </div>
                   <div>
                     <label htmlFor="value_unit" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Valor Unitário</label>
@@ -161,10 +168,11 @@ export default function CreateProductionModal() {
               </form>
             </div>
           </div>
-        </div>
-      )}
+        </div >
+      )
+      }
 
-    </div>
+    </div >
   )
 }
 

@@ -3,6 +3,7 @@ import { ExpenseContext } from '../contexts/ExpenseContext';
 import CreateExpenseModal from './CreateExpenseModal';
 import UpdateExpenseModal from './UpdateExpenseModal';
 import DeleteExpenseModal from './DeleteExpenseModal';
+import formatData from '../../services/FormatDate';
 
 export default function TableExpenseList() {
 
@@ -55,7 +56,7 @@ export default function TableExpenseList() {
                         <td className="px-4 py-3">{data.quantity}</td>
                         <td className="px-4 py-3">{data.value_unit}</td>
                         <td className="px-4 py-3">{data.value_total}</td>
-                        <td className="px-4 py-3">{data.data_pgto}</td>
+                        <td className="px-4 py-3">{formatData(data.data_pgto)}</td>
 
                         <td className="flex-1 m-0 p-3 justify-end">
 

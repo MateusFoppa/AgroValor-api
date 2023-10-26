@@ -1,6 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BatchContext } from "../contexts/BatchContext";
 import { createExpense } from "../../services/api";
+import SelectUnitOf from "../Select/SelectUnitOf";
+import SelectCategoryExpense from "../Select/SelectCategoryExpense";
 
 export default function CreateExpenseModal() {
 
@@ -15,6 +17,18 @@ export default function CreateExpenseModal() {
   const [unit_of, setUnitOf] = useState("");
   const [value_total, setValueTotal] = useState("");
   const [value_unit, setValueUnit] = useState("");
+
+  useEffect(() => {
+    const calculateTotal = () => {
+      const quantityValue = parseFloat(quantity);
+      const unitValue = parseFloat(value_unit);
+      if (!isNaN(quantityValue) && !isNaN(unitValue)) {
+        const total = quantityValue * unitValue;
+        setValueTotal(total);
+      }
+    };
+    calculateTotal();
+  }, [quantity, value_unit]);
 
   function openCreateModal() {
     setCreateModalOpen(true);
@@ -39,6 +53,7 @@ export default function CreateExpenseModal() {
     console.log(PropertyRequest);
     window.location.reload();
   }
+
   return (
     <div className="flex items-center justify-center">
       <button onClick={openCreateModal} type="button" id="createProductionModalButton" className="flex items-center justify-center text-white bg-teal-500 hover:bg-teal-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 ">
@@ -69,15 +84,9 @@ export default function CreateExpenseModal() {
 
                   <div>
                     <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
-                    <input
-                      type="text"
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
-                      name="category"
-                      id="category"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder="Categoria de custo"
-                    />
+                    <SelectCategoryExpense value={category} onChange={(e) => {
+                      setCategory(e.target.value)
+                    }} />
                   </div>
                   <div>
                     <label htmlFor="item" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Item</label>
@@ -93,15 +102,9 @@ export default function CreateExpenseModal() {
                   </div>
                   <div>
                     <label htmlFor="unit_of" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
-                    <input
-                      type="text"
-                      value={unit_of}
-                      onChange={(e) => setUnitOf(e.target.value)}
-                      name="unit_of"
-                      id="unit_of"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder="Unit de medida"
-                    />
+                    <SelectUnitOf value={unit_of} onChange={(e) => {
+                      setUnitOf(e.target.value)
+                    }} />
                   </div>
                   <div>
                     <label htmlFor="value_unit" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Valor Unitário</label>

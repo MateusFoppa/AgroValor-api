@@ -21,7 +21,7 @@ export default function DeleteProductionModal(data) {
 
   async function handlerDelete() {
     setDeleteModalOpen(false);
-    const ProductionRequest = await deleteProduction(selectProduction.id, batchState.id)
+    const ProductionRequest = await deleteProduction(batchState.id, selectProduction.id)
     console.log(ProductionRequest)
     window.location.reload();
   }
