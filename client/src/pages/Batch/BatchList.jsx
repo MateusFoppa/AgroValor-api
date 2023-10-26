@@ -1,4 +1,4 @@
-import FormCrudBatch from "../../components/Batch/FormCrudBatch"
+import TableBatchList from "../../components/Batch/TableBatchList"
 import SideBar from "../../components/SideBar/SideBar"
 
 
@@ -9,7 +9,7 @@ export default function BatchList(){
       <SideBar />
       </div>
       <div className="flex h-screen mx-auto">
-      <FormCrudBatch></FormCrudBatch>
+      <TableBatchList></TableBatchList>
       </div>
     </div>
   )
