@@ -11,18 +11,6 @@ export default function SelectUnitOf({ value, onChange }) {
       <option label='Unidade de medida'></option>
       <option value="Kg">Kg</option>
       <option value="Lt">Lt</option>
-      <option value="g">g</option>
-      <option value="ml">ml</option>
-      <option value="Tn">Tn</option>
-      <option value="Sc/60kg">Sc/60kg</option>
-      <option value="Sc/50kg">Sc/50kg</option>
-      <option value="Sc/40kg">Sc/40kg</option>
-      <option value="Sc/25kg">Sc/25kg</option>
-      <option value="Bins/350kg">Bins/350kg</option>
-      <option value="Bins/400kg">Bins/400kg</option>
-      <option value="Caixa/40kg">Caixa/40kg</option>
-      <option value="Caixa/25kg">Caixa/25kg</option>
-      <option value="Caixa/20kg">Caixa/20kg</option>
     </select>
   );
 }

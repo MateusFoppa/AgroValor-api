@@ -13,7 +13,6 @@ export default function TableBatchList() {
     console.log(JSON.stringify(data.name))
     localStorage.setItem('StateBatch', JSON.stringify(data));
     setBatchState(JSON.parse(localStorage.getItem('StateBatch')))
-    window.location.reload();
   }
 
   return (
