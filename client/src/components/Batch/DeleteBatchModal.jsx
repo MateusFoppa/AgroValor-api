@@ -7,7 +7,7 @@ export default function DeleteBatchModal(data) {
 
   const [selectBatch, setSelectBatch] = useState("");
 
-  const { propertyState } = useContext(BatchContext)
+  const { propertyState, setUpdate } = useContext(BatchContext)
 
   function openDeleteModal(data) {
     setSelectBatch(data.value);
@@ -22,7 +22,7 @@ export default function DeleteBatchModal(data) {
     setDeleteModalOpen(false);
     const PropertyRequest = await deleteBatch(selectBatch, propertyState.id)
     console.log(PropertyRequest)
-    window.location.reload();
+    setUpdate(PropertyRequest)
   }
 
   return (

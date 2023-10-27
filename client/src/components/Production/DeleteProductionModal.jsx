@@ -1,6 +1,7 @@
 import { deleteProduction } from "../../services/api";
 import { useContext, useState } from "react";
 import { BatchContext } from "../contexts/BatchContext";
+import { ProductionContext } from "../contexts/ProductionContext";
 
 export default function DeleteProductionModal(data) {
 
@@ -9,6 +10,7 @@ export default function DeleteProductionModal(data) {
   const [selectProduction, setSelectProduction] = useState("");
 
   const { batchState } = useContext(BatchContext)
+  const { setUpdate } = useContext(ProductionContext)
 
   function openDeleteModal(data) {
     setSelectProduction(data.value);
@@ -23,7 +25,7 @@ export default function DeleteProductionModal(data) {
     setDeleteModalOpen(false);
     const ProductionRequest = await deleteProduction(batchState.id, selectProduction.id)
     console.log(ProductionRequest)
-    window.location.reload();
+    setUpdate(ProductionRequest)
   }
   return (
     <div className="flex items-center justify-center">

@@ -3,15 +3,19 @@ import { PropertyContext } from "../contexts/PropertyContext";
 import CreatePropertyModal from "./CreatePropertyModel";
 import UpdatePropertyModal from "./UpdatePropertyModal";
 import DeletePropertyModal from "./DeletePropertyModal";
+import { BatchContext } from "../contexts/BatchContext";
 
 export default function TablePropertyList() {
 
   const { property, setPropertyState } = useContext(PropertyContext)
+  const { setBatchState } = useContext(BatchContext)
+
 
   const handlerState = (data) => {
     console.log(JSON.stringify(data.name))
     localStorage.setItem('StateProperty', JSON.stringify(data));
     setPropertyState(JSON.parse(localStorage.getItem('StateProperty')))
+    setBatchState(false);
   }
 
 
@@ -29,6 +33,9 @@ export default function TablePropertyList() {
               <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
+                    <th scope="col" className="px-4 py-3">
+                      <span className="sr-only">Actions</span>
+                    </th>
                     <th scope="col" className="px-4 py-4">Nome</th>
                     <th scope="col" className="px-4 py-3">Cidade</th>
                     <th scope="col" className="px-4 py-3">Estado</th>
@@ -46,28 +53,38 @@ export default function TablePropertyList() {
                   </tr>
                 </thead>
                 <tbody>
-                  {property.map((data) => (
-                    <tr key={data.id} className="border-b dark:border-gray-700">
-                      <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <td>
-                          <input onClick={() => { handlerState(data) }} type="radio" name="checbox"></input>
-                        </td>
-                        <td className="px-4 py-3">{data.name}</td></th>
-                      <td className="px-4 py-3">{data.city}</td>
-                      <td className="px-4 py-3 max-w-[12rem] truncate">{data.state}</td>
-                      <td className="px-4 py-3">{data.cultivated_area}</td>
-                      <td className="px-4 py-3">{data.total_area}</td>
-
-                      <td className="flex-1 m-0 p-3 justify-end">
-
-                        <UpdatePropertyModal value={data}></UpdatePropertyModal>
-
-                      </td>
-                      <td className="flex-1 p-3">
-                        <DeletePropertyModal value={data}></DeletePropertyModal>
+                  {property.length == 0 ?
+                    <tr className="flex-1 mx-auto">
+                      <td colSpan={"8"}>
+                        <div className="w-full justify-center md:w-auto flex col-span-3 text-gray-500 p-5  font-bold rounded-md">
+                          <span>Nenhuma Propriedade Adicionada á esse Usuário</span>
+                        </div>
                       </td>
                     </tr>
-                  ))
+                    : property.map((data) => (
+                      <tr key={data.id} className="border-b dark:border-gray-700">
+                        <td className="px-4 py-3">
+
+                          <input onClick={() => { handlerState(data) }} type="radio" name="checbox"></input>
+                        </td>
+                        <td scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                          {data.name}</td>
+
+                        <td className="px-4 py-3">{data.city}</td>
+                        <td className="px-4 py-3">{data.state}</td>
+                        <td className="px-4 py-3">{data.cultivated_area}</td>
+                        <td className="px-4 py-3">{data.total_area}</td>
+
+                        <td className="flex-1 m-0 p-3 justify-end">
+
+                          <UpdatePropertyModal value={data}></UpdatePropertyModal>
+
+                        </td>
+                        <td className="flex-1 p-3">
+                          <DeletePropertyModal value={data}></DeletePropertyModal>
+                        </td>
+                      </tr>
+                    ))
                   }
 
 

@@ -43,15 +43,18 @@ export default function TableProductionList() {
                   </tr>
                 </thead>
                 <tbody>
-                  {!production ?
-                    <tr className='inline-block'>
-                      <td className='flex-1 w-full'>
-                        Nenhuma Produção adicionada
+                  {production.length == 0 ?
+                    <tr className="flex-1 mx-auto">
+                      <td colSpan={"8"}>
+                        <div className="w-full justify-center md:w-auto flex col-span-3 text-gray-500 p-5  font-bold rounded-md">
+                          <span>Nenhuma Produção Adicionada á esse Lote</span>
+                        </div>
                       </td>
-                    </tr> : production.map((data) => (
+                    </tr>
+                    : production.map((data) => (
                       <tr key={data.id} className="border-b dark:border-gray-700">
-                        <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          <td className="px-4 py-3">{data.category}</td></th>
+                        <td scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                          {data.category}</td>
                         <td className="px-4 py-3">{data.item}</td>
                         <td className="px-4 py-3 max-w-[12rem] truncate">{data.unit_of}</td>
                         <td className="px-4 py-3">{data.quantity}</td>

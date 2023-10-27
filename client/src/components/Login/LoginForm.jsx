@@ -4,18 +4,18 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 
 export function LoginForm() {
-  const {email, password, setEmail, setPassword, submitLogin} = useContext(UserContext)
+  const { email, password, setEmail, setPassword, submitLogin } = useContext(UserContext)
   return (
-<form onSubmit={submitLogin} className="flex max-w-md flex-col gap-4 w-full px-10 py-2 text-white">
-        <Logo></Logo>
+    <form onSubmit={submitLogin} className="flex max-w-md flex-col gap-4 w-full px-6 py-2 text-white">
+      <Logo></Logo>
       <div>
         <div className="mb-2 block">
           <label htmlFor="email1">
-              Email:
+            Email:
           </label>
         </div>
         <input
-          className='p-2 rounded-md text-slate-900'
+          className='p-2 rounded-md text-slate-900 md:w-72'
           id="email1"
           placeholder="name@email.com"
           required
@@ -31,7 +31,7 @@ export function LoginForm() {
           >Senha:</label>
         </div>
         <input
-          className='p-2 rounded-md text-slate-900'
+          className='p-2 rounded-md text-slate-900 md:w-72'
           id="password1"
           placeholder="Sua senha"
           required
@@ -39,13 +39,17 @@ export function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button type="submit" className='bg-teal-400 p-2 rounded-md hover:bg-teal-500 mt-2'>
-        Entrar
+      <button type="submit" className='bg-teal-400 p-2 rounded-md hover:bg-teal-500 mt-2 opacity-75 font-medium'>
+        <span className="text-xl">
+          Entrar
+        </span>
       </button>
       <div className="flex justify-end">
-      <Link to={'/register'} className='text-teal-200 hover:text-teal-300'>
-        Registrar-se
-      </Link>
+        <Link to={'/register'} className='text-teal-200 hover:text-teal-300'>
+          <span className="text-lg">
+            Registrar-se
+          </span>
+        </Link>
       </div>
     </form>
   )

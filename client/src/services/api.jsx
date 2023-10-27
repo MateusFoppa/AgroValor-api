@@ -35,7 +35,7 @@ export const updatePropertys = async (id, name, state, cultivated_area, total_ar
 
 export const deletePropertys = async (id) => {
   const response = await api.delete(`/property/${id}`)
-  return response.data;
+  return response;
 };
 
 export const getBatch = async (id) => {
@@ -64,7 +64,7 @@ export const updateBatch = async (batch_id, property_id, name, activity) => {
 
 export const deleteBatch = async (batch_id, property_id) => {
   const response = await api.delete(`/batch/${batch_id}/property/${property_id}`)
-  return response.data;
+  return response;
 };
 
 export const getExpense = async (batch_id) => {
@@ -121,7 +121,7 @@ export const updateExpense = async (
 
 export const deleteExpense = async (batch_id, expense_id) => {
   const response = await api.delete(`/expense/${expense_id}/batch/${batch_id}`)
-  return response.data;
+  return response;
 };
 
 export const getProduction = async (batch_id) => {
@@ -178,5 +178,5 @@ export const updateProduction = async (
 
 export const deleteProduction = async (batch_id, production_id) => {
   const response = await api.delete(`/production/${production_id}/batch/${batch_id}`)
-  return response.data;
+  return response;
 };

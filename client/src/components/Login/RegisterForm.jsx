@@ -9,7 +9,7 @@ export function RegisterForm() {
 
 
   return (
-    <form onSubmit={submitRegister} className="flex flex-col gap-4 px-8 py-2 text-white font-sans">
+    <form onSubmit={submitRegister} className="flex flex-col gap-4 px-6 py-2 text-white font-sans">
       <Logo></Logo>
       <div>
         <div className="mb-2 block">
@@ -58,7 +58,7 @@ export function RegisterForm() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button type="submit" className='bg-teal-400 p-2 rounded-md hover:bg-teal-500 mt-2 opacity-75 font-bold'>
+      <button type="submit" className='bg-teal-400 p-2 rounded-md hover:bg-teal-500 mt-2 opacity-75 font-medium'>
         <span className="text-xl">
           Cadastrar-se
         </span>

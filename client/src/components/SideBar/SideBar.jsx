@@ -23,11 +23,17 @@ export default function SideBar() {
     { name: "Dashboard", link: "/home", icon: MdOutlineDashboard },
     { name: username ? username.name : "Usuário", link: "/user", icon: AiOutlineUser },
     { name: propertyState ? propertyState.name : "Propriedades", link: "/property", icon: AiFillHome, margin: true },
-    { name: batchState ? batchState.name : "Lotes", link: "/batch", icon: AiOutlineGateway },
-    { name: "Despesas", link: "/expense", icon: FaDollarSign },
-    { name: "Produção", link: "/production", icon: FiTruck },
-    { name: "Financeiro", link: "/finance", icon: AiTwotoneBank },
+    { name: batchState ? batchState.name : "Selecione um Lote", link: "/batch", icon: AiOutlineGateway },
   ];
+
+  if (batchState && propertyState) {
+    menus.push(
+      { name: "Despesas", link: "/expense", icon: FaDollarSign },
+      { name: "Produção", link: "/production", icon: FiTruck },
+      { name: "Financeiro", link: "/finance", icon: AiTwotoneBank }
+    );
+  }
+
   const [open, setOpen] = useState(true);
   return (
     <section className="flex gap-6">

@@ -3,12 +3,15 @@ import { BatchContext } from "../contexts/BatchContext";
 import { createExpense } from "../../services/api";
 import SelectUnitOf from "../Select/SelectUnitOf";
 import SelectCategoryExpense from "../Select/SelectExpenseCategory";
+import { ExpenseContext } from "../contexts/ExpenseContext";
 
 export default function CreateExpenseModal() {
 
   const [isModalCreateOpen, setCreateModalOpen] = useState(false);
 
   const { batchState } = useContext(BatchContext)
+  const { setUpdate } = useContext(ExpenseContext)
+
 
   const [category, setCategory] = useState("");
   const [item, setItem] = useState("");
@@ -51,7 +54,7 @@ export default function CreateExpenseModal() {
       value_total,
       data_pgto)
     console.log(PropertyRequest);
-    window.location.reload();
+    setUpdate(PropertyRequest)
   }
 
   return (

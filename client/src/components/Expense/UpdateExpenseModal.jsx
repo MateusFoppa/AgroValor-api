@@ -3,12 +3,15 @@ import { BatchContext } from "../contexts/BatchContext";
 import { updateExpense } from "../../services/api";
 import SelectUnitOf from "../Select/SelectUnitOf";
 import SelectCategoryExpense from "../Select/SelectExpenseCategory";
+import { ExpenseContext } from "../contexts/ExpenseContext";
 
 export default function UpdateExpenseModal(data) {
 
   const [isModalUpdateOpen, setUpdateModalOpen] = useState(false);
 
   const { batchState } = useContext(BatchContext)
+  const { setUpdate } = useContext(ExpenseContext)
+
 
   const [category, setCategory] = useState("");
   const [item, setItem] = useState("");
@@ -51,7 +54,7 @@ export default function UpdateExpenseModal(data) {
       value_total,
       data_pgto)
     console.log(PropertyRequest);
-    window.location.reload();
+    setUpdate(PropertyRequest);
   }
   return (
     <div className="flex items-center justify-center">

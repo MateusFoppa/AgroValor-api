@@ -13,7 +13,7 @@ export const UserProvider = ({ children }) => {
   const [password, setPassword] = useState('');
 
   const handleLogin = async (e) => {
-      e.preventDefault();
+    e.preventDefault();
 
     console.log('Email:', email);
     console.log('Password:', password);
@@ -41,33 +41,33 @@ export const UserProvider = ({ children }) => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-  console.log('Nome:',name);
-  console.log('Email:', email);
-  console.log('Password:', password);
+    console.log('Nome:', name);
+    console.log('Email:', email);
+    console.log('Password:', password);
 
 
-  if (!email || !password) {
-    console.error('Por favor, complete todos os campos');
-    return;
-  }
+    if (!email || !password) {
+      console.error('Por favor, complete todos os campos');
+      return;
+    }
 
-  try {
-    const response = await axios.post('http://localhost:5000/user', {
-      name,
-      email,
-      password,
-    });
-    console.log('Server response:', response.data);
-    const { user, token } = response.data;
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(user));
-    navigate('/property')
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
+    try {
+      const response = await axios.post('http://localhost:5000/user', {
+        name,
+        email,
+        password,
+      });
+      console.log('Server response:', response.data);
+      const { user, token } = response.data;
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+      navigate('/property')
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
   return (
-    <UserContext.Provider value={{email, password, name, setName, setEmail, setPassword, submitLogin: handleLogin, submitRegister: handleRegister}}>
+    <UserContext.Provider value={{ email, password, name, setName, setEmail, setPassword, submitLogin: handleLogin, submitRegister: handleRegister }}>
       {children}
     </UserContext.Provider>
   )

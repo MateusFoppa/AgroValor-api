@@ -10,7 +10,7 @@ export const ProductionContext = createContext({})
 export function ProductionProvider({ children }) {
   const [production, setProductions] = useState([])
   const { batchState } = useContext(BatchContext)
-
+  const [update, setUpdate] = useState("")
 
 
   useEffect(() => {
@@ -31,13 +31,14 @@ export function ProductionProvider({ children }) {
 
         } catch (error) {
           console.error(error)
+          setProductions([])
         }
       })()
     }
-  }, [batchState])
+  }, [batchState, update])
 
   return (
-    <ProductionContext.Provider value={{ production }}>
+    <ProductionContext.Provider value={{ production, setUpdate }}>
       {children}
     </ProductionContext.Provider>
   )

@@ -10,9 +10,10 @@ export const BatchContext = createContext({})
 export function BatchProvider({ children }) {
   const { propertyState } = useContext(PropertyContext)
 
-
   const [batch, setBatchs] = useState([])
   const [batchState, setBatchState] = useState(JSON.parse(localStorage.getItem('StateBatch')) || "")
+  const [update, setUpdate] = useState("")
+
   useEffect(() => {
     (async () => {
       try {
@@ -32,16 +33,17 @@ export function BatchProvider({ children }) {
 
       } catch (error) {
         console.error(error)
+        setBatchs([])
       }
     })()
-  }, [propertyState])
+  }, [propertyState, update])
 
   console.log(batch)
 
 
 
   return (
-    <BatchContext.Provider value={{ batch, batchState, setBatchState, propertyState }}>
+    <BatchContext.Provider value={{ batch, batchState, setUpdate, setBatchState, propertyState }}>
       {children}
     </BatchContext.Provider>
   )

@@ -6,7 +6,7 @@ export default function CreateBatchModal() {
 
   const [isModalCreateOpen, setCreateModalOpen] = useState(false);
 
-  const { propertyState } = useContext(BatchContext)
+  const { propertyState, setUpdate } = useContext(BatchContext)
 
   const [name, setName] = useState("");
   const [activity, setActivity] = useState("");
@@ -27,7 +27,7 @@ export default function CreateBatchModal() {
     setGeographic_coordinates("165165165165");
     const PropertyRequest = await createBatch(propertyState.id, name, activity, geographic_coordinates)
     console.log(PropertyRequest);
-    window.location.reload();
+    setUpdate(PropertyRequest);
   }
   return (
     <div className="flex items-center justify-center">

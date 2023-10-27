@@ -3,12 +3,14 @@ import { BatchContext } from "../contexts/BatchContext";
 import { updateProduction } from "../../services/api";
 import SelectUnitOf from "../Select/SelectUnitOf";
 import SelectProductionCategory from "../Select/SelectProductionCategory";
+import { ProductionContext } from "../contexts/ProductionContext";
 
 export default function UpdateProductionModal(data) {
 
   const [isModalUpdateOpen, setUpdateModalOpen] = useState(false);
 
   const { batchState } = useContext(BatchContext)
+  const { setUpdate } = useContext(ProductionContext)
 
   const [category, setCategory] = useState("");
   const [item, setItem] = useState("");
@@ -51,7 +53,7 @@ export default function UpdateProductionModal(data) {
       value_total,
       receipt_date)
     console.log(PropertyRequest);
-    window.location.reload();
+    setUpdate(PropertyRequest);
   }
   return (
     <div className="flex items-center justify-center">

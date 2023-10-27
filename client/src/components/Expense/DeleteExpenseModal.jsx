@@ -1,6 +1,7 @@
 import { deleteExpense } from "../../services/api";
 import { useContext, useState } from "react";
 import { BatchContext } from "../contexts/BatchContext";
+import { ExpenseContext } from "../contexts/ExpenseContext";
 
 export default function DeleteExpenseModal(data) {
 
@@ -9,6 +10,8 @@ export default function DeleteExpenseModal(data) {
   const [selectExpense, setSelectExpense] = useState("");
 
   const { batchState } = useContext(BatchContext)
+  const { setUpdate } = useContext(ExpenseContext)
+
 
   function openDeleteModal(data) {
     setSelectExpense(data.value);
@@ -21,9 +24,9 @@ export default function DeleteExpenseModal(data) {
 
   async function handlerDelete() {
     setDeleteModalOpen(false);
-    const ExpenseRequest = await deleteExpense(selectExpense.id, batchState.id)
+    const ExpenseRequest = await deleteExpense(batchState.id, selectExpense.id)
     console.log(ExpenseRequest)
-    window.location.reload();
+    setUpdate(ExpenseRequest);
   }
   return (
     <div className="flex items-center justify-center">

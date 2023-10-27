@@ -42,15 +42,18 @@ export default function TableExpenseList() {
                   </tr>
                 </thead>
                 <tbody>
-                  {!expense ?
-                    <tr className='inline-block'>
-                      <td className='flex-1 w-full'>
-                        Nenhuma despesa adicionada
+                  {expense.length == 0 ?
+                    <tr className="flex-1 mx-auto">
+                      <td colSpan={"8"}>
+                        <div className="w-full justify-center md:w-auto flex col-span-3 text-gray-500 p-5  font-bold rounded-md">
+                          <span>Nenhuma Despesa Adicionada á esse Lote</span>
+                        </div>
                       </td>
-                    </tr> : expense.map((data) => (
+                    </tr>
+                    : expense.map((data) => (
                       <tr key={data.id} className="border-b dark:border-gray-700">
-                        <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          <td className="px-4 py-3">{data.category}</td></th>
+                        <td scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                          {data.category}</td>
                         <td className="px-4 py-3">{data.item}</td>
                         <td className="px-4 py-3 max-w-[12rem] truncate">{data.unit_of}</td>
                         <td className="px-4 py-3">{data.quantity}</td>

@@ -1,10 +1,13 @@
 import { deletePropertys } from "../../services/api";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { PropertyContext } from "../contexts/PropertyContext";
 
 export default function DeletePropertyModal(data) {
 
   const [selectProperty, setSelectProperty] = useState("");
   const [isModalDeleteOpen, setDeleteModalOpen] = useState(false);
+
+  const { setUpdate } = useContext(PropertyContext)
 
   function openDeleteModal(data) {
     setSelectProperty(data.value.id);
@@ -19,7 +22,7 @@ export default function DeletePropertyModal(data) {
     setDeleteModalOpen(false);
     const PropertyRequest = await deletePropertys(selectProperty)
     console.log(PropertyRequest)
-    window.location.reload();
+    setUpdate(PropertyRequest)
   }
 
   return (

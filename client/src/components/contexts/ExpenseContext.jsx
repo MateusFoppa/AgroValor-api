@@ -11,6 +11,8 @@ export function ExpenseProvider({ children }) {
   const [expense, setExpenses] = useState([])
   const { batchState } = useContext(BatchContext)
 
+  const [update, setUpdate] = useState("")
+
 
 
   useEffect(() => {
@@ -31,13 +33,14 @@ export function ExpenseProvider({ children }) {
 
         } catch (error) {
           console.error(error)
+          setExpenses([])
         }
       })()
     }
-  }, [batchState])
+  }, [batchState, update])
 
   return (
-    <ExpenseContext.Provider value={{ expense }}>
+    <ExpenseContext.Provider value={{ expense, setUpdate }}>
       {children}
     </ExpenseContext.Provider>
   )
