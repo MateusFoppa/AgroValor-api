@@ -7,41 +7,43 @@ import { PropertyContext } from './PropertyContext'
 export const BatchContext = createContext({})
 
 // eslint-disable-next-line react/prop-types
-export function BatchProvider({children}) {
-  const {propertyState} = useContext(PropertyContext)
-
+export function BatchProvider({ children }) {
+  const { propertyState } = useContext(PropertyContext)
 
   const [batch, setBatchs] = useState([])
   const [batchState, setBatchState] = useState(JSON.parse(localStorage.getItem('StateBatch')) || "")
+  const [update, setUpdate] = useState("")
+
   useEffect(() => {
     (async () => {
-     try {
-       const BatchRequest = await getBatch(propertyState.id)
+      try {
+        const BatchRequest = await getBatch(propertyState.id)
 
-       console.log(BatchRequest)
+        console.log(BatchRequest)
 
-       const requests = [BatchRequest]
+        const requests = [BatchRequest]
 
-       console.log(requests)
+        console.log(requests)
 
-       const [
-         { data: batchResponse },
-       ] = await Promise.all(requests)
+        const [
+          { data: batchResponse },
+        ] = await Promise.all(requests)
 
-       setBatchs(batchResponse)
+        setBatchs(batchResponse)
 
-     } catch (error) {
-       console.error(error)
-     }
-   })()
- }, [])
+      } catch (error) {
+        console.error(error)
+        setBatchs([])
+      }
+    })()
+  }, [propertyState, update])
 
- console.log(batch)
+  console.log(batch)
 
 
 
   return (
-    <BatchContext.Provider value={{ batch, batchState, setBatchState, propertyState }}>
+    <BatchContext.Provider value={{ batch, batchState, setUpdate, setBatchState, propertyState }}>
       {children}
     </BatchContext.Provider>
   )

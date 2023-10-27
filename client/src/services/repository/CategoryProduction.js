@@ -1,0 +1,18 @@
+export const categoriesOfProduction = [
+  { id: 1, name: "Uva processamento" },
+  { id: 2, name: "Uva in natura" },
+  { id: 8, name: "Laranja in natura" },
+  { id: 8, name: "Larana processamento" },
+  { id: 8, name: "Maça in natura" },
+  { id: 8, name: "Maça processamento" },
+  { id: 8, name: "Pêssego in natura" },
+  { id: 8, name: "Pêssego processamento" },
+  { id: 3, name: "Leite" },
+  { id: 4, name: "Venda de Animal" },
+  { id: 5, name: "Milho" },
+  { id: 8, name: "Soja" },
+  { id: 8, name: "Trigo" },
+  { id: 8, name: "Cevada" },
+  { id: 6, name: "Silagem de Milho" },
+  { id: 7, name: "Silagem de Trigo" },
+];

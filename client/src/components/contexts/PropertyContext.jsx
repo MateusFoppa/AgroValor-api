@@ -6,14 +6,15 @@ import { createContext, useEffect, useState } from 'react'
 export const PropertyContext = createContext({})
 
 // eslint-disable-next-line react/prop-types
-export function PropertyProvider({children}) {
+export function PropertyProvider({ children }) {
   const [property, setPropertys] = useState([])
   const [propertyState, setPropertyState] = useState(JSON.parse(localStorage.getItem('StateProperty')) || "");
+  const [update, setUpdate] = useState("")
 
 
 
   useEffect(() => {
-     (async () => {
+    (async () => {
       try {
         const PropertyRequest = await getPropertys()
 
@@ -30,14 +31,15 @@ export function PropertyProvider({children}) {
 
       } catch (error) {
         console.error(error)
+        setPropertys([])
       }
     })()
-  }, [])
+  }, [setPropertys, update])
 
 
 
   return (
-    <PropertyContext.Provider value={{ property, propertyState, setPropertyState }}>
+    <PropertyContext.Provider value={{ property, propertyState, setUpdate, setPropertyState }}>
       {children}
     </PropertyContext.Provider>
   )

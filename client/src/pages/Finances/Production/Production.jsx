@@ -1,15 +1,19 @@
+import { ProductionProvider } from "../../../components/contexts/ProductionContext";
+import TableProductionList from "../../../components/Production/TableProductionList";
 import SideBar from "../../../components/SideBar/SideBar";
 
-export default function Production(){
-  return(
-    <div className="bg-slate-600 flex">
+export default function Production() {
+  return (
+    <div className="bg-slate-600 flex overflow-hidden">
       <div className="h-screen">
-      <SideBar />
+        <SideBar />
       </div>
-      <div className="flex h-screen mx-auto">
-      <div className="flex h-full w-full items-center justify-center text-white">
-        <h1>Lista de Produções lote selecionado, botão mais</h1>
-      </div>
+      <div className="flex-1 justify-center items-center">
+        <div className="flex h-full w-full items-center justify-center text-white">
+          <ProductionProvider>
+            <TableProductionList></TableProductionList>
+          </ProductionProvider>
+        </div>
       </div>
     </div>
   )

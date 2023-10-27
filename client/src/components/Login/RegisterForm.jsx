@@ -4,21 +4,21 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 
 export function RegisterForm() {
-  const {name, email, password, setName, setEmail, setPassword, submitRegister} = useContext(UserContext)
+  const { name, email, password, setName, setEmail, setPassword, submitRegister } = useContext(UserContext)
 
 
 
   return (
-<form onSubmit={submitRegister} className="flex flex-col gap-4 px-8 py-2 text-white">
-        <Logo></Logo>
-        <div>
+    <form onSubmit={submitRegister} className="flex flex-col gap-4 px-6 py-2 text-white font-sans">
+      <Logo></Logo>
+      <div>
         <div className="mb-2 block">
           <label htmlFor="name1">
             Nome:
-         </label>
+          </label>
         </div>
         <input
-          className='p-2 rounded-md text-slate-900'
+          className='p-2 rounded-md text-slate-900 md:w-72'
           id="email1"
           placeholder="Seu nome"
           required
@@ -30,11 +30,11 @@ export function RegisterForm() {
       <div>
         <div className="mb-2 block">
           <label htmlFor="email1">
-              Email:
+            Email:
           </label>
         </div>
         <input
-          className='p-2 rounded-md text-slate-900'
+          className='p-2 rounded-md text-slate-900 md:w-72'
           id="email1"
           placeholder="name@email.com"
           required
@@ -50,7 +50,7 @@ export function RegisterForm() {
           >Senha:</label>
         </div>
         <input
-          className='p-2 rounded-md text-slate-900'
+          className='p-2 rounded-md text-slate-900 md:w-72'
           id="password1"
           placeholder="Sua senha"
           required
@@ -58,13 +58,17 @@ export function RegisterForm() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button type="submit" className='bg-teal-400 p-2 rounded-md hover:bg-teal-500 mt-2'>
-        Cadastrar-se
+      <button type="submit" className='bg-teal-400 p-2 rounded-md hover:bg-teal-500 mt-2 opacity-75 font-medium'>
+        <span className="text-xl">
+          Cadastrar-se
+        </span>
       </button>
       <div className="flex justify-end">
-      <Link to={'/session'} className='text-teal-200 hover:text-teal-300'>
-        Entrar
-      </Link>
+        <Link to={'/session'} className='text-teal-200 hover:text-teal-300'>
+          <span className="text-lg">
+            Entrar
+          </span>
+        </Link>
       </div>
     </form>
   )
