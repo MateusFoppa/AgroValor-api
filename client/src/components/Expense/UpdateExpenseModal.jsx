@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { BatchContext } from "../contexts/BatchContext";
 import { updateExpense } from "../../services/api";
 import SelectUnitOf from "../Select/SelectUnitOf";
-import SelectCategoryExpense from "../Select/SelectCategoryExpense";
+import SelectCategoryExpense from "../Select/SelectExpenseCategory";
 
 export default function UpdateExpenseModal(data) {
 

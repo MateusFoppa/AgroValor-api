@@ -12,6 +12,7 @@ export default function TablePropertyList() {
     console.log(JSON.stringify(data.name))
     localStorage.setItem('StateProperty', JSON.stringify(data));
     setPropertyState(JSON.parse(localStorage.getItem('StateProperty')))
+    window.location.reload();
   }
 
 
