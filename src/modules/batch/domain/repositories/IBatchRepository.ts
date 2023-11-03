@@ -4,6 +4,7 @@ import { ICreateBatch } from '../models/ICreateBatch';
 import { IListBatch } from '../models/IListBatch';
 
 export interface IBatchRepository {
+  getReportFinanceForBatch(batch_id: string): unknown;
   findAll(property_Id: string): Promise<IListBatch>;
   findByName(name: string, property_id: string): Promise<IBatch | null>;
   findByIds(batch_id: string, property_id: string): Promise<IBatch | null>;

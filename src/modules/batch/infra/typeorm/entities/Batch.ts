@@ -8,7 +8,10 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
+import Production from '@modules/production/infra/typeorm/entities/Production';
+import Expenses from '@modules/expenses/infra/typeorm/entities/Expense';
 
 @Entity('batch')
 class Batch implements IBatch {
@@ -36,6 +39,12 @@ class Batch implements IBatch {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => Production, production => production.batch)
+  productions: Production[];
+
+  @OneToMany(() => Expenses, expenses => expenses.batch)
+  expenses: Expenses[];
 }
 
 export default Batch;
