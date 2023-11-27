@@ -50,16 +50,6 @@ export function RegisterForm() {
             htmlFor="password1"
           >Senha:</label>
         </div>
-<<<<<<< Updated upstream
-        <input
-          className='p-2 rounded-md text-slate-900 md:w-72'
-          id="password1"
-          placeholder="Sua senha"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-=======
         <div className="relative">
           <input
             type={showPassword ? "text" : "password"}
@@ -82,7 +72,6 @@ export function RegisterForm() {
             )}
           </button>
         </div>
->>>>>>> Stashed changes
       </div>
       <button type="submit" className='bg-teal-400 p-2 rounded-md hover:bg-teal-500 mt-2 opacity-75 font-medium'>
         <span className="text-xl">
