@@ -3,6 +3,7 @@ import DeleteBatchService from '@modules/batch/services/DeleteBatchService';
 import ListBatchService from '@modules/batch/services/ListBatchService';
 import ShowBatchService from '@modules/batch/services/ShowBatchService';
 import UpdateBatchService from '@modules/batch/services/UpdateBatchService';
+import ReportFinanceBatchService from '@modules/batch/services/ReportFinanceBatchService';
 
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
@@ -71,5 +72,15 @@ export default class BatchController {
     await deleteBatch.execute({ property_id, batch_id });
 
     return response.sendStatus(StatusCodes.NO_CONTENT);
+  }
+
+  public async financeReport(request: Request, response: Response): Promise<Response> {
+    const property_id = request.params.property_id;
+    const batch_id = request.params.batch_id;
+    const reportFinanceBatch = container.resolve(ReportFinanceBatchService);
+
+    const reportfinance = await reportFinanceBatch.execute({ property_id, batch_id });
+
+    return response.status(StatusCodes.OK).json(reportfinance);
   }
 }
