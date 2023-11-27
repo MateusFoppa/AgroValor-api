@@ -31,6 +31,7 @@ export function LoginForm() {
           >Senha:</label>
         </div>
         <input
+          type="password"
           className='p-2 rounded-md text-slate-900 md:w-72'
           id="password1"
           placeholder="Sua senha"

@@ -67,6 +67,11 @@ export const deleteBatch = async (batch_id, property_id) => {
   return response;
 };
 
+export const reportFinanceBatch = async (batch_id, property_id) => {
+  const response = await api.get(`/batch/${batch_id}/property/${property_id}/reportfinance`)
+  return response.data;
+};
+
 export const getExpense = async (batch_id) => {
   const response = await api.get(`expense/batch/${batch_id}`)
   return response.data;
