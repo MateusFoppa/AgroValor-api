@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { Logo } from "../Logo/Logo";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 
+import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 export function LoginForm() {
   const { email, password, setEmail, setPassword, submitLogin } = useContext(UserContext)
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <form onSubmit={submitLogin} className="flex max-w-md flex-col gap-4 w-full px-6 py-2 text-white">
       <Logo></Logo>
@@ -30,15 +32,28 @@ export function LoginForm() {
             htmlFor="password1"
           >Senha:</label>
         </div>
-        <input
-          type="password"
-          className='p-2 rounded-md text-slate-900 md:w-72'
-          id="password1"
-          placeholder="Sua senha"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            className='p-2 rounded-md text-slate-900 md:w-72'
+            id="password1"
+            placeholder="Sua senha"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            type="button"
+            className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              <IoIosEyeOff className="w-6 h-6 text-gray-500" />
+            ) : (
+              <IoIosEye className="w-6 h-6 text-gray-500" />
+            )}
+          </button>
+        </div>
       </div>
       <button type="submit" className='bg-teal-400 p-2 rounded-md hover:bg-teal-500 mt-2 opacity-75 font-medium'>
         <span className="text-xl">
@@ -52,6 +67,6 @@ export function LoginForm() {
           </span>
         </Link>
       </div>
-    </form>
+    </form >
   )
 }

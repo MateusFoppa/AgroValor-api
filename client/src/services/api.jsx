@@ -12,6 +12,16 @@ if (!token) {
 
 api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
+export const getShowUserProfile = async () => {
+  const response = await api.get("/profile");
+  return response.data;
+};
+
+export const updateUserProfile = async (name, avatar, email, password, password_confirmation, old_password) => {
+  const response = await api.put("/profile", { name, avatar, email, password, password_confirmation, old_password });
+  return response.data;
+};
+
 export const getPropertys = async () => {
   const response = await api.get("/property/user");
   return response.data;

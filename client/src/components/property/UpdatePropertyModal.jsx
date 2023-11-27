@@ -50,7 +50,6 @@ export default function UpdatePropertyModal(data) {
       {isModalUpdateOpen && (
         <div id="updateProductModal" tabIndex="-1" aria-hidden="true" className="flex bg-slate-800 bg-opacity-75 h-screen overflow-y-auto overflow-x-hidden fixed z-50 justify-center items-center w-screen mx-auto  md:inset-0 max-h-full">
           <div className="relative p-4 w-full max-w-2xl max-h-full">
-
             <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
 
               <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
