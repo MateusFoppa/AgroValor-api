@@ -5,6 +5,9 @@ import UpdateUser from "./UpdateUser";
 export default function TableShowUser() {
 
   const [user, setUser] = useState('');
+  const [updateUser, setUpdateUser] = useState('');
+
+
   useEffect(() => {
     (async () => {
       try {
@@ -25,7 +28,7 @@ export default function TableShowUser() {
         setUser('')
       }
     })()
-  }, [])
+  }, [updateUser])
 
   return (
     <div className="flex p-4 justify-center items-center">
@@ -53,7 +56,7 @@ export default function TableShowUser() {
                       {user.name}</td>
                     <td className="px-4 py-3">{user.email}</td>
                     <td className="px-4 py-3 text-sm font-medium">
-                      <UpdateUser value={user}></UpdateUser>
+                      <UpdateUser user={user} setUpdateUser={setUpdateUser}></UpdateUser>
                     </td>
                   </tr>
                 </tbody>

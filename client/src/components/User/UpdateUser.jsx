@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import { updateUserProfile } from "../../services/api";
-import { PropertyContext } from "../contexts/PropertyContext";
 
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 
@@ -15,12 +15,16 @@ export default function UpdatePropertyModal(data) {
   const [isPasswordSectionOpen, setPasswordSectionOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const { setUpdate } = useContext(PropertyContext);
 
   function openUpdateModal(data) {
-    setName(data.value.name);
-    setEmail(data.value.email);
-    setUpdateModalOpen(true);
+    console.log(data)
+    if (data.user) {
+      setName(data.user.name);
+      setEmail(data.user.email);
+      setUpdateModalOpen(true);
+    } else {
+      console.error("Data or data.user is undefined");
+    }
   }
 
   function closeUpdateModal() {
@@ -34,14 +38,12 @@ export default function UpdatePropertyModal(data) {
     if (password && passwordConfirmation && oldPassword) {
       const passwordUpdateRequest = await updateUserProfile(name, avatar, email, password, passwordConfirmation, oldPassword)
       console.log({ passwordUpdateRequest });
-      setUpdate(passwordUpdateRequest);
-
+      data.setUpdateUser(passwordUpdateRequest)
     } else {
       const PropertyRequest = await updateUserProfile(name, avatar, email)
       console.log({ PropertyRequest })
-      setUpdate(PropertyRequest);
+      data.setUpdateUser(PropertyRequest)
     }
-
   }
 
   return (
