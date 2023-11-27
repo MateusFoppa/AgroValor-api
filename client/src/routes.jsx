@@ -6,7 +6,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import HomePage from "./pages/Home/home";
-import FinancesPage from "./pages/Finances/Finances";
+import FinancesPage from "./pages/Finances/Finances2";
 import ExpensesPage from "./pages/Finances/Expenses/Expenses";
 import ProductionPage from "./pages/Finances/Production/Production";
 import { isAuth } from "./services/auth";

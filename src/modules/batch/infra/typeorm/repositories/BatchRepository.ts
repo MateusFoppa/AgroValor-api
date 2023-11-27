@@ -140,7 +140,7 @@ class BatchRepository implements IBatchRepository {
       productions.reduce((a, b) => a + b.value_total, 0) -
       expenses.reduce((a, b) => a + b.value_total, 0);
 
-    return { combinedData, balancoFinanceiro };
+    return { combinedData, balancoFinanceiro, expenses, productions };
   }
 }
 

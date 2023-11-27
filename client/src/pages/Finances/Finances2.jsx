@@ -1,66 +1,57 @@
-import { useContext, useEffect, useState } from "react"
-import SideBar from "../../components/SideBar/SideBar"
-import { reportFinanceBatch } from "../../services/api"
-import { BatchContext } from "../../components/contexts/BatchContext"
-import jsPDF from "jspdf"
-import html2PDF from "jspdf-html2canvas"
-import PieChart from "../../components/Charts/PieChart"
+import SideBar from '../../components/SideBar/SideBar';
+import { reportFinanceBatch } from '../../services/api';
+import { BatchContext } from '../../components/contexts/BatchContext';
+import PieChart from '../../components/Charts/PieChart';
+
+import { useContext, useEffect, useRef, useState } from 'react';
+import generatePDF, { Margin } from 'react-to-pdf';
 
 
-export default function Finances() {
-  const { batchState, propertyState } = useContext(BatchContext)
-
-  const [reportfinance, setReportFinanceBatchs] = useState('')
+const Finances = () => {
+  const { batchState, propertyState } = useContext(BatchContext);
+  const [reportfinance, setReportFinanceBatchs] = useState('');
+  const pdfContentRef = useRef(null);
+  const [contentLoaded, setContentLoaded] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
-        const BatchRequest = await reportFinanceBatch(batchState.id, propertyState.id)
+        const BatchRequest = await reportFinanceBatch(batchState.id, propertyState.id);
 
-        const requests = [BatchRequest]
+        const requests = [BatchRequest];
 
-        const [
-          batchResponse
-        ] = await Promise.all(requests)
+        const [batchResponse] = await Promise.all(requests);
 
-        setReportFinanceBatchs(batchResponse)
-
-        console.log(reportfinance)
+        setReportFinanceBatchs(batchResponse);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-    })()
-  }, [])
+    })();
+  }, []);
 
 
-  const generatePDF = async () => {
-    const element = document.getElementById("pdf-content");
+  const options = {
+    // Baixar/Salvar = save / Abrir no navegador = open
+    method: 'open',
+    page: {
+      // Definir a margem: SMALL ou MEDIUM
+      margin: Margin.MEDIUM,
+      // Formato da página: A4 ou letter
+      format: 'A4',
+      // Orientação do arquivo: portrait ou landscape
+      orientation: 'portrait',
+    },
+  }
 
-    if (!element) {
-      console.error('Element with ID "pdf-content" not found.');
-      return;
-    }
-
-    const pdfOptions = {
-      margin: 10,
-      filename: 'report.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    };
-
-    try {
-      html2PDF(element, { useCORS: true }).then(canvas => {
-        const imgData = canvas.toDataURL('image/jpeg', 1.0);
-        const pdf = new jsPDF(pdfOptions);
-        pdf.addImage(imgData, 'JPEG', 0, 0);
-        pdf.save(pdfOptions.filename);
-
-      });
-    } catch (error) {
-      console.error('Error generating PDF:', error);
+  const handleGeneratePDF = () => {
+    // Verifica se o conteúdo da div está renderizado
+    if (pdfContentRef.current && contentLoaded) {
+      generatePDF(() => pdfContentRef.current, options);
+    } else {
+      console.error('O conteúdo da div não está disponível para renderização do PDF.');
     }
   };
+
   return (
     <div className="bg-slate-600 flex max-w-full h-screen overflow-hidden">
       <div className="h-screen block">
@@ -70,12 +61,16 @@ export default function Finances() {
         <div className="flex justify-end w-full md:w-auto md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center md:space-x-3 flex-shrink-0">
           <button
             className="flex items-center justify-center text-white bg-teal-500 hover:bg-teal-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 mt-8 mr-8"
-            onClick={generatePDF}>
+            onClick={handleGeneratePDF}
+          >
             Baixar PDF
           </button>
         </div>
-        <div id="pdf-content" className="flex-col flex h-full w-full items-center justify-center text-white">
-
+        <div
+          ref={pdfContentRef}
+          id="pdf-content"
+          className="flex-col flex h-full w-full items-center justify-center text-white"
+        >
           {reportfinance.combinedData ? (
             <div className="max-w-screen-xl h-screen">
               <section className="sm:p-5">
@@ -143,7 +138,9 @@ export default function Finances() {
             <p className="text-center text-gray-500">Dados não disponíveis</p>
           )}
         </div>
-      </div >
-    </div >
-  )
-}
+      </div>
+    </div>
+  );
+};
+
+export default Finances;
