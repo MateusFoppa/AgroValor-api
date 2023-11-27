@@ -76,9 +76,7 @@ export default function TablePropertyList() {
                         <td className="px-4 py-3">{data.total_area}</td>
 
                         <td className="flex-1 m-0 p-3 justify-end">
-
                           <UpdatePropertyModal value={data}></UpdatePropertyModal>
-
                         </td>
                         <td className="flex-1 p-3">
                           <DeletePropertyModal value={data}></DeletePropertyModal>
