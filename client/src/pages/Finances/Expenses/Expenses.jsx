@@ -4,16 +4,14 @@ import TableExpenseList from "../../../components/Expense/TableExpenseList";
 
 export default function Expences() {
   return (
-    <div className="bg-slate-600 flex overflow-x-hidden">
-      <div className="h-screen">
+    <div className="bg-slate-600 flex max-w-full h-screen overflow-hidden">
+      <div className="h-screen block">
         <SideBar />
       </div>
-      <div className="flex-1 justify-center items-center">
-        <div className="flex h-full w-full items-center justify-center text-white">
-          <ExpenseProvider>
-            <TableExpenseList></TableExpenseList>
-          </ExpenseProvider>
-        </div>
+      <div className="flex-1 justify-center items-center h-screen overflow-y-auto">
+        <ExpenseProvider>
+          <TableExpenseList></TableExpenseList>
+        </ExpenseProvider>
       </div>
     </div>
   )

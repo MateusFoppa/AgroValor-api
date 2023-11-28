@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from 'react';
 import ReportFinancePDF from '../../services/Reports/ReportFinancePDF';
 import { formatBRL } from '../../services/FomatBRL';
 import formatData from '../../services/FormatDate';
+import { FaFilePdf } from 'react-icons/fa';
 
 
 const Finances = () => {
@@ -44,7 +45,10 @@ const Finances = () => {
             className="flex items-center justify-center text-white bg-teal-500 hover:bg-teal-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 mt-8 mr-8"
             onClick={() => handleGeneratePDF()}
           >
-            Baixar PDF
+            <span className='m-1'>
+              <FaFilePdf />
+            </span>
+            Gerar PDF
           </button>
         </div>
 
@@ -107,12 +111,9 @@ const Finances = () => {
                   </div>
                 </div>
               </section>
-              <div className="flex">
+              <div className="flex justify-center">
                 <div className="w-1/2 p-10 mb-10">
-                  <PieChart data={reportfinance.expenses}></PieChart>
-                </div>
-                <div className="w-1/2 p-10 mb-10">
-                  <PieChart data={reportfinance.productions}></PieChart>
+                  <PieChart data={reportfinance.combinedData}></PieChart>
                 </div>
               </div>
             </div>

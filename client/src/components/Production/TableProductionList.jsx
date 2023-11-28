@@ -4,6 +4,7 @@ import CreateProductionModal from './CreateProductionModal';
 import UpdateProductionModal from './UpdateProductionModal';
 import DeleteProductionModal from './DeleteProductionModal';
 import formatData from '../../services/FormatDate';
+import PieChart from '../Charts/PieChart';
 
 
 export default function TableProductionList() {
@@ -82,6 +83,11 @@ export default function TableProductionList() {
           </div>
         </div>
       </section>
+      <div className="flex justify-center">
+        <div className="w-1/2 p-10 mb-10">
+          <PieChart data={production}></PieChart>
+        </div>
+      </div>
     </div>
 
   )
