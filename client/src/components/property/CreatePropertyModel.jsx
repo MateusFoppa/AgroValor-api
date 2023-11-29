@@ -1,6 +1,7 @@
 import { createPropertys } from "../../services/api";
 import { useContext, useState } from "react";
 import { PropertyContext } from "../contexts/PropertyContext";
+import { toast } from 'react-toastify';
 
 export default function CreatePropertyModal() {
 
@@ -24,11 +25,14 @@ export default function CreatePropertyModal() {
   }
 
   const handlerCreate = async () => {
-    console.log(name, state, cultivated_area, total_area, city)
-    setCreateModalOpen(false);
-    const PropertyRequest = await createPropertys(name, state, cultivated_area, total_area, city)
-    console.log(PropertyRequest);
-    setUpdate(PropertyRequest);
+    try {
+      const PropertyRequest = await createPropertys(name, state, cultivated_area, total_area, city)
+      setUpdate(PropertyRequest);
+      toast.success('Propriedade criada com sucesso!');
+      setCreateModalOpen(false);
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
   }
 
   return (

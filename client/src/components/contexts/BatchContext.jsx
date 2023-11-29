@@ -19,11 +19,7 @@ export function BatchProvider({ children }) {
       try {
         const BatchRequest = await getBatch(propertyState.id)
 
-        console.log(BatchRequest)
-
         const requests = [BatchRequest]
-
-        console.log(requests)
 
         const [
           { data: batchResponse },
@@ -32,15 +28,10 @@ export function BatchProvider({ children }) {
         setBatchs(batchResponse)
 
       } catch (error) {
-        console.error(error)
         setBatchs([])
       }
     })()
   }, [propertyState, update])
-
-  console.log(batch)
-
-
 
   return (
     <BatchContext.Provider value={{ batch, batchState, setUpdate, setBatchState, propertyState }}>

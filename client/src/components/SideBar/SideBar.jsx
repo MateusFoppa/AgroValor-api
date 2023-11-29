@@ -36,10 +36,10 @@ export default function SideBar() {
 
   const [open, setOpen] = useState(true);
   return (
-    <section className="flex gap-6">
+    <section className="flex gap-6 h-screen">
       <div
         className={`bg-slate-900 min-h-screen ${open ? "w-64" : "w-16"
-          } duration-500 text-gray-100 px-4`}
+          } duration-500 text-gray-100 px-4 `}
       >
         <div className="py-3 flex flex-wrap">
           <div className={` ${!open ? "hidden" : "p-2"}`}>

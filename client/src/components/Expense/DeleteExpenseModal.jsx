@@ -2,6 +2,7 @@ import { deleteExpense } from "../../services/api";
 import { useContext, useState } from "react";
 import { BatchContext } from "../contexts/BatchContext";
 import { ExpenseContext } from "../contexts/ExpenseContext";
+import { toast } from "react-toastify";
 
 export default function DeleteExpenseModal(data) {
 
@@ -23,10 +24,15 @@ export default function DeleteExpenseModal(data) {
   }
 
   async function handlerDelete() {
-    setDeleteModalOpen(false);
-    const ExpenseRequest = await deleteExpense(batchState.id, selectExpense.id)
-    console.log(ExpenseRequest)
-    setUpdate(ExpenseRequest);
+    try {
+      const ExpenseRequest = await deleteExpense(batchState.id, selectExpense.id)
+      console.log(ExpenseRequest)
+      setUpdate(ExpenseRequest);
+      toast.success('Despesa removida com sucesso')
+      setDeleteModalOpen(false);
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
   }
   return (
     <div className="flex items-center justify-center">

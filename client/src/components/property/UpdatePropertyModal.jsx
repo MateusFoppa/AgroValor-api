@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { updatePropertys } from "../../services/api";
 import { PropertyContext } from "../contexts/PropertyContext";
+import { toast } from "react-toastify";
 
 export default function UpdatePropertyModal(data) {
   const [name, setName] = useState("");
@@ -33,10 +34,13 @@ export default function UpdatePropertyModal(data) {
     setUpdateModalOpen(false);
     console.log(selectProperty)
 
-    const PropertyRequest = await updatePropertys(selectProperty, name, state, cultivated_area, total_area, city)
-    console.log({ PropertyRequest })
-
-    setUpdate(PropertyRequest);
+    try {
+      const PropertyRequest = await updatePropertys(selectProperty, name, state, cultivated_area, total_area, city)
+      setUpdate(PropertyRequest);
+      toast.success('Propriedade atualizada com sucesso')
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
   }
 
   return (

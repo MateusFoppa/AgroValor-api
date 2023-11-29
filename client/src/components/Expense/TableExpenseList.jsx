@@ -4,6 +4,7 @@ import CreateExpenseModal from './CreateExpenseModal';
 import UpdateExpenseModal from './UpdateExpenseModal';
 import DeleteExpenseModal from './DeleteExpenseModal';
 import formatData from '../../services/FormatDate';
+import PieChart from '../Charts/PieChart';
 
 export default function TableExpenseList() {
 
@@ -77,10 +78,16 @@ export default function TableExpenseList() {
 
                 </tbody>
               </table>
+
             </div>
           </div>
         </div>
       </section>
+      <div className="flex justify-center">
+        <div className="w-1/2 p-10 mb-10">
+          <PieChart data={expense}></PieChart>
+        </div>
+      </div>
     </div>
 
   )

@@ -1,6 +1,7 @@
 import { deletePropertys } from "../../services/api";
 import { useContext, useState } from "react";
 import { PropertyContext } from "../contexts/PropertyContext";
+import { toast } from "react-toastify";
 
 export default function DeletePropertyModal(data) {
 
@@ -19,10 +20,14 @@ export default function DeletePropertyModal(data) {
   }
 
   async function handlerDelete() {
-    setDeleteModalOpen(false);
-    const PropertyRequest = await deletePropertys(selectProperty)
-    console.log(PropertyRequest)
-    setUpdate(PropertyRequest)
+    try {
+      const PropertyRequest = await deletePropertys(selectProperty)
+      setUpdate(PropertyRequest)
+      toast.success('Propriedade excluida com sucesso')
+      setDeleteModalOpen(false);
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
   }
 
   return (

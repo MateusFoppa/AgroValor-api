@@ -4,6 +4,7 @@ import { updateExpense } from "../../services/api";
 import SelectUnitOf from "../Select/SelectUnitOf";
 import SelectCategoryExpense from "../Select/SelectExpenseCategory";
 import { ExpenseContext } from "../contexts/ExpenseContext";
+import { toast } from "react-toastify";
 
 export default function UpdateExpenseModal(data) {
 
@@ -43,18 +44,23 @@ export default function UpdateExpenseModal(data) {
 
   const handlerUpdate = async () => {
     setUpdateModalOpen(false);
-    const PropertyRequest = await updateExpense(
-      batchState.id,
-      selectExpense,
-      category,
-      item,
-      unit_of,
-      quantity,
-      value_unit,
-      value_total,
-      data_pgto)
-    console.log(PropertyRequest);
-    setUpdate(PropertyRequest);
+    try {
+      const PropertyRequest = await updateExpense(
+        batchState.id,
+        selectExpense,
+        category,
+        item,
+        unit_of,
+        quantity,
+        value_unit,
+        value_total,
+        data_pgto)
+      console.log(PropertyRequest);
+      setUpdate(PropertyRequest);
+      toast.success('Despesa atualizada com sucesso')
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
   }
   return (
     <div className="flex items-center justify-center">

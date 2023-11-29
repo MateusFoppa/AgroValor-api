@@ -2,14 +2,14 @@ import TableBatchList from "../../components/Batch/TableBatchList"
 import SideBar from "../../components/SideBar/SideBar"
 
 
-export default function BatchList(){
-  return(
+export default function BatchList() {
+  return (
     <div className="bg-slate-600 flex">
       <div className="h-screen">
-      <SideBar />
+        <SideBar />
       </div>
       <div className="flex h-screen mx-auto">
-      <TableBatchList></TableBatchList>
+        <TableBatchList></TableBatchList>
       </div>
     </div>
   )

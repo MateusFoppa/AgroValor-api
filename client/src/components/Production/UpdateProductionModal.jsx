@@ -4,6 +4,7 @@ import { updateProduction } from "../../services/api";
 import SelectUnitOf from "../Select/SelectUnitOf";
 import SelectProductionCategory from "../Select/SelectProductionCategory";
 import { ProductionContext } from "../contexts/ProductionContext";
+import { toast } from "react-toastify";
 
 export default function UpdateProductionModal(data) {
 
@@ -41,19 +42,24 @@ export default function UpdateProductionModal(data) {
   }
 
   const handlerUpdate = async () => {
-    setUpdateModalOpen(false);
-    const PropertyRequest = await updateProduction(
-      batchState.id,
-      selectProduction,
-      category,
-      item,
-      unit_of,
-      quantity,
-      value_unit,
-      value_total,
-      receipt_date)
-    console.log(PropertyRequest);
-    setUpdate(PropertyRequest);
+    try {
+      const PropertyRequest = await updateProduction(
+        batchState.id,
+        selectProduction,
+        category,
+        item,
+        unit_of,
+        quantity,
+        value_unit,
+        value_total,
+        receipt_date)
+      console.log(PropertyRequest);
+      setUpdate(PropertyRequest);
+      setUpdateModalOpen(false);
+      toast.success('Produção atualizada com sucesso')
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
   }
   return (
     <div className="flex items-center justify-center">

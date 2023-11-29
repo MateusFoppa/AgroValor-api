@@ -23,8 +23,6 @@ export function ExpenseProvider({ children }) {
 
           const requests = [ExpenseRequest]
 
-          console.log(requests)
-
           const [
             { data: ExpenseResponse },
           ] = await Promise.all(requests)

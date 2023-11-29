@@ -1,6 +1,7 @@
 import { updateBatch } from "../../services/api";
 import { useContext, useState } from "react";
 import { BatchContext } from "../contexts/BatchContext";
+import { toast } from "react-toastify";
 
 export default function UpdateBatchModal(data) {
 
@@ -26,11 +27,14 @@ export default function UpdateBatchModal(data) {
   }
 
   const handlerUpdate = async () => {
-    console.log(name, activity, geographic_coordinates)
-    setUpdateModalOpen(false);
-    const PropertyRequest = await updateBatch(selectBatch, propertyState.id, name, activity)
-    console.log(PropertyRequest)
-    setUpdate(PropertyRequest)
+    try {
+      const PropertyRequest = await updateBatch(selectBatch, propertyState.id, name, activity)
+      setUpdate(PropertyRequest)
+      toast.success('Propriedade excluida com sucesso')
+      setUpdateModalOpen(false);
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
   }
 
   return (

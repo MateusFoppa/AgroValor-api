@@ -59,6 +59,7 @@ export const UserProvider = ({ children }) => {
       });
       console.log('Server response:', response.data);
       const { user, token } = response.data;
+      localStorage.clear();
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
       navigate('/property')

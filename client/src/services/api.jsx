@@ -1,13 +1,13 @@
 import axios from 'axios'
+import { Navigate } from 'react-router-dom';
 
 export const api = axios.create({
   baseURL: 'http://localhost:5000',
 })
-
 const token = localStorage.getItem('token');
 
 if (!token) {
-  throw new Error('Token de autenticação não encontrado.');
+  <Navigate to="/" replace />
 }
 
 api.defaults.headers.common['Authorization'] = `Bearer ${token}`;

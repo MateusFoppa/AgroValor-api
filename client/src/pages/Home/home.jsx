@@ -2,11 +2,11 @@ import SideBar from "../../components/SideBar/SideBar";
 
 
 
-export default function Home(){
-  return(
+export default function Home() {
+  return (
     <div className="bg-slate-600 flex">
       <div className=" h-screen">
-      <SideBar />
+        <SideBar />
       </div>
       <div className="flex h-screen mx-auto">
 

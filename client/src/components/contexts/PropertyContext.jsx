@@ -1,8 +1,6 @@
 import { getPropertys } from '../../services/api'
 import { createContext, useEffect, useState } from 'react'
 
-
-
 export const PropertyContext = createContext({})
 
 // eslint-disable-next-line react/prop-types
@@ -18,10 +16,7 @@ export function PropertyProvider({ children }) {
       try {
         const PropertyRequest = await getPropertys()
 
-
         const requests = [PropertyRequest]
-
-        console.log(requests)
 
         const [
           { data: propertyResponse },
@@ -30,7 +25,6 @@ export function PropertyProvider({ children }) {
         setPropertys(propertyResponse)
 
       } catch (error) {
-        console.error(error)
         setPropertys([])
       }
     })()
