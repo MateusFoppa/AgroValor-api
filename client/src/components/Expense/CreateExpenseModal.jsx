@@ -4,6 +4,7 @@ import { createExpense } from "../../services/api";
 import SelectUnitOf from "../Select/SelectUnitOf";
 import SelectCategoryExpense from "../Select/SelectExpenseCategory";
 import { ExpenseContext } from "../contexts/ExpenseContext";
+import { toast } from "react-toastify";
 
 export default function CreateExpenseModal() {
 
@@ -43,18 +44,23 @@ export default function CreateExpenseModal() {
   }
 
   const handlerCreate = async () => {
-    setCreateModalOpen(false);
-    const PropertyRequest = await createExpense(
-      batchState.id,
-      category,
-      item,
-      unit_of,
-      quantity,
-      value_unit,
-      value_total,
-      data_pgto)
-    console.log(PropertyRequest);
-    setUpdate(PropertyRequest)
+    try {
+      const PropertyRequest = await createExpense(
+        batchState.id,
+        category,
+        item,
+        unit_of,
+        quantity,
+        value_unit,
+        value_total,
+        data_pgto)
+      console.log(PropertyRequest);
+      setUpdate(PropertyRequest)
+      toast.success('Despesa adicionada com sucesso')
+      setCreateModalOpen(false);
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
   }
 
   return (

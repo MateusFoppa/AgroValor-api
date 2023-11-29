@@ -1,6 +1,7 @@
 import { createBatch } from "../../services/api";
 import { useContext, useState } from "react";
 import { BatchContext } from "../contexts/BatchContext";
+import { toast } from "react-toastify";
 
 export default function CreateBatchModal() {
 
@@ -22,12 +23,15 @@ export default function CreateBatchModal() {
   }
 
   const handlerCreate = async () => {
-    console.log(name, activity)
-    setCreateModalOpen(false);
     setGeographic_coordinates("165165165165");
-    const PropertyRequest = await createBatch(propertyState.id, name, activity, geographic_coordinates)
-    console.log(PropertyRequest);
-    setUpdate(PropertyRequest);
+    try {
+      const PropertyRequest = await createBatch(propertyState.id, name, activity, geographic_coordinates)
+      setUpdate(PropertyRequest);
+      setCreateModalOpen(false);
+      toast.success('Lote criado com sucesso')
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
   }
   return (
     <div className="flex items-center justify-center">

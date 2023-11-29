@@ -4,6 +4,7 @@ import { createProduction } from "../../services/api";
 import SelectUnitOf from "../Select/SelectUnitOf";
 import SelectProductionCategory from "../Select/SelectProductionCategory";
 import { ProductionContext } from "../contexts/ProductionContext";
+import { toast } from "react-toastify";
 
 export default function CreateProductionModal() {
 
@@ -42,18 +43,23 @@ export default function CreateProductionModal() {
   }
 
   const handlerCreate = async () => {
-    setCreateModalOpen(false);
-    const PropertyRequest = await createProduction(
-      batchState.id,
-      category,
-      item,
-      unit_of,
-      quantity,
-      value_unit,
-      value_total,
-      receipt_date)
-    console.log(PropertyRequest);
-    setUpdate(PropertyRequest);
+    try {
+      const PropertyRequest = await createProduction(
+        batchState.id,
+        category,
+        item,
+        unit_of,
+        quantity,
+        value_unit,
+        value_total,
+        receipt_date)
+      console.log(PropertyRequest);
+      setUpdate(PropertyRequest);
+      setCreateModalOpen(false);
+      toast.success('Produção adicionada com sucesso')
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
   }
   return (
     <div className="flex items-center justify-center">

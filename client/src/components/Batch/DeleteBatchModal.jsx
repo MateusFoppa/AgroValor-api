@@ -1,6 +1,7 @@
 import { deleteBatch } from "../../services/api";
 import { useContext, useState } from "react";
 import { BatchContext } from "../contexts/BatchContext";
+import { toast } from "react-toastify";
 
 export default function DeleteBatchModal(data) {
   const [isModalDeleteOpen, setDeleteModalOpen] = useState(false);
@@ -19,10 +20,14 @@ export default function DeleteBatchModal(data) {
   }
 
   async function handlerDelete() {
-    setDeleteModalOpen(false);
-    const PropertyRequest = await deleteBatch(selectBatch, propertyState.id)
-    console.log(PropertyRequest)
-    setUpdate(PropertyRequest)
+    try {
+      const PropertyRequest = await deleteBatch(selectBatch, propertyState.id)
+      setUpdate(PropertyRequest)
+      toast.success('Propriedade excluida com sucesso')
+      setDeleteModalOpen(false);
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
   }
 
   return (

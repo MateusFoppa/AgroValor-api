@@ -21,8 +21,6 @@ export function ProductionProvider({ children }) {
 
           const requests = [ProductionRequest]
 
-          console.log(requests)
-
           const [
             { data: ProductionResponse },
           ] = await Promise.all(requests)
@@ -30,7 +28,6 @@ export function ProductionProvider({ children }) {
           setProductions(ProductionResponse)
 
         } catch (error) {
-          console.error(error)
           setProductions([])
         }
       })()

@@ -2,6 +2,7 @@ import { deleteProduction } from "../../services/api";
 import { useContext, useState } from "react";
 import { BatchContext } from "../contexts/BatchContext";
 import { ProductionContext } from "../contexts/ProductionContext";
+import { toast } from "react-toastify";
 
 export default function DeleteProductionModal(data) {
 
@@ -22,10 +23,15 @@ export default function DeleteProductionModal(data) {
   }
 
   async function handlerDelete() {
-    setDeleteModalOpen(false);
-    const ProductionRequest = await deleteProduction(batchState.id, selectProduction.id)
-    console.log(ProductionRequest)
-    setUpdate(ProductionRequest)
+    try {
+      const ProductionRequest = await deleteProduction(batchState.id, selectProduction.id)
+      console.log(ProductionRequest)
+      setUpdate(ProductionRequest)
+      setDeleteModalOpen(false);
+      toast.success('Produção removida com sucesso')
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
   }
   return (
     <div className="flex items-center justify-center">
