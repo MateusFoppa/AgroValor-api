@@ -26,10 +26,10 @@ class Property implements IProperty {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @Column()
+  @Column({ type: 'decimal' })
   total_area: number;
 
-  @Column()
+  @Column({ type: 'decimal' })
   cultivated_area: number;
 
   @Column()

@@ -28,13 +28,13 @@ class Expenses implements IExpenses {
   @Column()
   unit_of: string;
 
-  @Column()
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   quantity: number;
 
-  @Column()
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   value_unit: number;
 
-  @Column()
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   value_total: number;
 
   @Column()

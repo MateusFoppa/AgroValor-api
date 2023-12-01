@@ -32,15 +32,15 @@ export class CreateProduction1698171116379 implements MigrationInterface {
           },
           {
             name: 'quantity',
-            type: 'int',
+            type: 'decimal',
           },
           {
             name: 'value_unit',
-            type: 'int',
+            type: 'decimal',
           },
           {
             name: 'value_total',
-            type: 'int',
+            type: 'decimal',
           },
           {
             name: 'receipt_date',

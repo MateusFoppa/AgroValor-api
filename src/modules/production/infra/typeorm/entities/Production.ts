@@ -28,13 +28,13 @@ class Production implements IProduction {
   @Column()
   unit_of: string;
 
-  @Column()
+  @Column({ type: 'decimal' })
   quantity: number;
 
-  @Column()
+  @Column({ type: 'decimal' })
   value_unit: number;
 
-  @Column()
+  @Column({ type: 'decimal' })
   value_total: number;
 
   @Column()
