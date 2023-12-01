@@ -23,7 +23,7 @@ export default function DeleteBatchModal(data) {
     try {
       const PropertyRequest = await deleteBatch(selectBatch, propertyState.id)
       setUpdate(PropertyRequest)
-      toast.success('Propriedade excluida com sucesso')
+      toast.success('Lote removido com sucesso')
       setDeleteModalOpen(false);
     } catch (error) {
       toast.error(error.response.data.msg)

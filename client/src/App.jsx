@@ -7,6 +7,7 @@ import { ExpenseProvider } from "./components/contexts/ExpenseContext";
 import { ProductionProvider } from "./components/contexts/ProductionContext";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { UserProvider } from "./components/contexts/UserContext";
 
 // const contextClass = {
 //   success: "bg-slate-800",
@@ -21,28 +22,30 @@ function App() {
 
   return (
     <BrowserRouter>
-      <PropertyProvider>
-        <BatchProvider>
-          <ExpenseProvider>
-            <ProductionProvider>
-              <AppRoutes />
-              <ToastContainer
-                toastClassName="bg-slate-800 relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer"
-                position="top-center"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-              />
-            </ProductionProvider>
-          </ExpenseProvider>
-        </BatchProvider>
-      </PropertyProvider>
+      <UserProvider>
+        <PropertyProvider>
+          <BatchProvider>
+            <ExpenseProvider>
+              <ProductionProvider>
+                <AppRoutes />
+                <ToastContainer
+                  toastClassName="bg-slate-800 relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer"
+                  position="top-center"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="dark"
+                />
+              </ProductionProvider>
+            </ExpenseProvider>
+          </BatchProvider>
+        </PropertyProvider>
+      </UserProvider>
     </BrowserRouter>
   )
 }

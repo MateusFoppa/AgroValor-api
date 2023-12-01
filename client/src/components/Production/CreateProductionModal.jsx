@@ -43,6 +43,10 @@ export default function CreateProductionModal() {
   }
 
   const handlerCreate = async () => {
+    if (!category || !item || !unit_of || !quantity || !value_unit || !value_total || !receipt_date) {
+      toast.error('Por favor, preencha todos os campos.');
+      return;
+    }
     try {
       const PropertyRequest = await createProduction(
         batchState.id,
@@ -85,7 +89,7 @@ export default function CreateProductionModal() {
                 </button>
               </div>
 
-              <form>
+              <form >
                 <div className="grid gap-4 mb-4 sm:grid-cols-2">
 
 
@@ -103,6 +107,7 @@ export default function CreateProductionModal() {
                       onChange={(e) => setItem(e.target.value)}
                       name="item"
                       id="item"
+                      required
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Item"
                     />
@@ -121,6 +126,7 @@ export default function CreateProductionModal() {
                       onChange={(e) => setValueUnit(e.target.value)}
                       name="value_unit"
                       id="value_unit"
+                      required
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Valor Unitário"
                     />
@@ -133,6 +139,7 @@ export default function CreateProductionModal() {
                       onChange={(e) => setQuantity(e.target.value)}
                       name="quantity"
                       id="quantity"
+                      required
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Quantidade"
                     />
@@ -145,6 +152,7 @@ export default function CreateProductionModal() {
                       onChange={(e) => setValueTotal(e.target.value)}
                       name="value_total"
                       id="value_total"
+                      required
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Valor Total"
                     />
@@ -157,6 +165,7 @@ export default function CreateProductionModal() {
                       onChange={(e) => setReceiptDate(e.target.value)}
                       name="receipt_date"
                       id="receipt_date"
+                      required
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Data de Recebimento"
                     />
