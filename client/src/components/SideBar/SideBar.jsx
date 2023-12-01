@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
-import { MdOutlineDashboard } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import { AiFillHome, AiOutlineGateway, AiTwotoneBank } from "react-icons/ai";
 import { FaDollarSign } from 'react-icons/fa';
@@ -20,7 +19,6 @@ export default function SideBar() {
   const username = JSON.parse(localStorage.getItem('user'));
 
   const menus = [
-    { name: "Dashboard", link: "/home", icon: MdOutlineDashboard },
     { name: username ? username.name : "Usuário", link: "/user", icon: AiOutlineUser },
     { name: propertyState ? propertyState.name : "Propriedades", link: "/property", icon: AiFillHome, margin: true },
     { name: batchState ? batchState.name : "Selecione um Lote", link: "/batch", icon: AiOutlineGateway },

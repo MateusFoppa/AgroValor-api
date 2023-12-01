@@ -6,29 +6,6 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PieChart = ({ data }) => {
 
-  // const coldColors = [
-  //   'rgba(153, 102, 255, 0.6)',
-  //   'rgba(75, 192, 192, 0.6)',
-  //   'rgba(128, 128, 128, 0.6)',
-  //   'rgba(0, 128, 0, 0.6)',
-  //   'rgba(0, 0, 128, 0.6)',
-  //   'rgba(128, 0, 0, 0.6)',
-  //   'rgba(54, 162, 235, 0.6)',
-  // ];
-
-  // const hotColors = [
-  //   'rgba(255, 0, 255, 0.6)',
-  //   'rgba(255, 215, 0, 0.6)',
-  //   'rgba(255, 99, 71, 0.6)',
-  //   'rgba(255, 20, 147, 0.6)',
-  //   'rgba(128, 0, 128, 0.6)',
-  //   'rgba(255, 255, 0, 0.6)',
-  //   'rgba(255, 165, 0, 0.6)',
-  //   'rgba(255, 0, 0, 0.6)',
-  //   'rgba(255, 69, 0, 0.6)',
-  //   'rgba(255, 140, 0, 0.6)',
-  // ];
-
   const generateColors = (numColors, hue, saturation, lightness) => {
     const colors = [];
 
@@ -46,9 +23,6 @@ const PieChart = ({ data }) => {
 
   // Gerar 15 tons quentes (vermelho, amarelo e laranja)
   const hotColors = generateColors(15, 20, 70, 60);
-
-  console.log('Cold Colors:', coldColors);
-  console.log('Hot Colors:', hotColors);
 
   const sumValuesByCategory = (data) => {
     const categoryMap = {};
@@ -71,12 +45,7 @@ const PieChart = ({ data }) => {
 
   const dataValuesGrup = sumValuesByCategory(data);
 
-  console.log(data);
-
   const getColorArray = data.map((item, idx) => item.expense_id ? hotColors[idx] : coldColors[idx])
-
-  console.log(getColorArray);
-
 
   const tags = dataValuesGrup.map((item) => item.category);
   const valores = dataValuesGrup.map((item) => item.value_total);
@@ -100,18 +69,23 @@ const PieChart = ({ data }) => {
       fontSize: 20,
       fontColor: 'rgba(255, 255, 255, 1)',
     },
-    legend: {
-      display: true,
-      position: 'bottom',
-      labels: {
-        fontColor: 'white',
+    plugins: {
+      legend: {
+        display: true,
+        position: 'right',
+        labels: {
+          font: {
+            color: 'white',
+            size: 16,
+          },
+        },
       },
     },
     layout: {
       padding: {
         left: 20,
         right: 20,
-        top: 10,
+        top: 20,
         bottom: 80,
       },
     },

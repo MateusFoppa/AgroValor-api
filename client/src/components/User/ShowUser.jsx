@@ -1,34 +1,9 @@
-import { getShowUserProfile } from "../../services/api";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import UpdateUser from "./UpdateUser";
+import { UserContext } from "../contexts/UserContext";
 
 export default function TableShowUser() {
-
-  const [user, setUser] = useState('');
-  const [updateUser, setUpdateUser] = useState('');
-
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const UserRequest = await getShowUserProfile()
-
-
-        const requests = [UserRequest]
-
-        console.log(requests)
-
-        const [userResponse] = await Promise.all(requests)
-
-        setUser(userResponse)
-        console.log(userResponse)
-
-      } catch (error) {
-        console.error(error)
-        setUser('')
-      }
-    })()
-  }, [updateUser])
+  const { user, setUpdateUser } = useContext(UserContext);
 
   return (
     <div className="flex p-4 justify-center items-center">

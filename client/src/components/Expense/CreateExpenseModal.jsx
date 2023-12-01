@@ -44,6 +44,10 @@ export default function CreateExpenseModal() {
   }
 
   const handlerCreate = async () => {
+    if (!category || !item || !unit_of || !quantity || !value_unit || !value_total || !data_pgto) {
+      toast.error('Por favor, preencha todos os campos.');
+      return;
+    }
     try {
       const PropertyRequest = await createExpense(
         batchState.id,

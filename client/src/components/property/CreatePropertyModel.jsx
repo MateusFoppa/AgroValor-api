@@ -25,6 +25,10 @@ export default function CreatePropertyModal() {
   }
 
   const handlerCreate = async () => {
+    if (!name || !state || !cultivated_area || !total_area || !city) {
+      toast.error('Por favor, preencha todos os campos.');
+      return;
+    }
     try {
       const PropertyRequest = await createPropertys(name, state, cultivated_area, total_area, city)
       setUpdate(PropertyRequest);
@@ -63,24 +67,24 @@ export default function CreatePropertyModal() {
                 <div className="grid gap-4 mb-4 sm:grid-cols-2">
                   <div>
                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome da Propriedade</label>
-                    <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nome"></input>
+                    <input type="text" name="name" id="name" value={name} required onChange={(e) => setName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nome"></input>
                   </div>
 
                   <div>
                     <label htmlFor="cultivated" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Area Cultivada</label>
-                    <input type="number" value={cultivated_area} onChange={(e) => setCultivatedArea(e.target.value)} name="cultivated" id="cultivated" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Número de ha"></input>
+                    <input type="number" value={cultivated_area} required onChange={(e) => setCultivatedArea(e.target.value)} name="cultivated" id="cultivated" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Número de ha"></input>
                   </div>
                   <div>
                     <label htmlFor="areatotal" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Area Total</label>
-                    <input type="number" name="areatotal" id="areatotal" value={total_area} onChange={(e) => setTotalArea(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Número de ha"></input>
+                    <input type="number" name="areatotal" id="areatotal" required value={total_area} onChange={(e) => setTotalArea(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Número de ha"></input>
                   </div>
                   <div>
                     <label htmlFor="city" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cidade</label>
-                    <input type="text" name="city" id="city" value={city} onChange={(e) => setCity(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Sua Cidade"></input>
+                    <input type="text" name="city" id="city" value={city} required onChange={(e) => setCity(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Sua Cidade"></input>
                   </div>
                   <div>
                     <label htmlFor="state" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado</label>
-                    <input type="text" name="state" id="state" value={state} onChange={(e) => setState(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Seu Estado"></input>
+                    <input type="text" name="state" id="state" value={state} required onChange={(e) => setState(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Seu Estado"></input>
                   </div>
                 </div>
                 <button type="button" onClick={handlerCreate} data-modal-target="createProductModal" data-modal-toggle="createProductModal" className="text-white inline-flex items-center bg-teal-500 hover:bg-teal-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">

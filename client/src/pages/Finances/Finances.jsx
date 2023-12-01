@@ -112,7 +112,7 @@ const Finances = () => {
                 </div>
               </section>
               <div className="flex justify-center">
-                <div className="w-1/2 p-10 mb-10">
+                <div className="w-1/2 mb-10">
                   <PieChart data={reportfinance.combinedData}></PieChart>
                 </div>
               </div>

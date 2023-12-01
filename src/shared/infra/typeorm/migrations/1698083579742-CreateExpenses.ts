@@ -32,15 +32,15 @@ export class CreateExpenses1698083579742 implements MigrationInterface {
           },
           {
             name: 'quantity',
-            type: 'decimal',
+            type: 'int',
           },
           {
             name: 'value_unit',
-            type: 'decimal',
+            type: 'int',
           },
           {
             name: 'value_total',
-            type: 'decimal',
+            type: 'int',
           },
           {
             name: 'data_pgto',

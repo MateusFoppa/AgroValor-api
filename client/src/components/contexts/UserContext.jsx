@@ -1,6 +1,8 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import { getShowUserProfile } from "../../services/api";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const UserContext = createContext()
 
@@ -11,16 +13,33 @@ export const UserProvider = ({ children }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState('');
+  const [updateUser, setUpdateUser] = useState(localStorage.getItem('user') ?? '');
+
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const UserRequest = await getShowUserProfile()
+
+        const requests = [UserRequest]
+
+        const [userResponse] = await Promise.all(requests)
+
+        setUser(userResponse)
+
+      } catch (error) {
+        console.error(error)
+        setUser('')
+      }
+    })()
+  }, [updateUser, email])
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    console.log('Email:', email);
-    console.log('Password:', password);
-
-
     if (!email || !password) {
-      console.error('Por favor, completa todos los campos');
+      toast.error('Por favor, complete os campos');
       return;
     }
 
@@ -29,46 +48,52 @@ export const UserProvider = ({ children }) => {
         email,
         password,
       });
-      console.log('Server response:', response.data);
       const { user, token } = response.data;
+      localStorage.clear();
+      setUpdateUser(user);
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      navigate('/property')
+      toast.success('Aguarde! Entrando no AgroValor');
+      setTimeout(() => {
+        navigate('/property');
+      }, 2000);
     } catch (error) {
-      console.error('Error:', error);
+      toast.error(error.response.data.msg)
     }
   };
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    console.log('Nome:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
-
-
-    if (!email || !password) {
-      console.error('Por favor, complete todos os campos');
+    if (!email || !password || !name) {
+      toast.error('Por favor, complete os campos');
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/user', {
+      await axios.post('http://localhost:5000/user', {
         name,
         email,
         password,
       });
-      console.log('Server response:', response.data);
+      const response = await axios.post('http://localhost:5000/sessions', {
+        email,
+        password,
+      });
       const { user, token } = response.data;
       localStorage.clear();
+      setUpdateUser(user);
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      navigate('/property')
+      toast.success('Aguarde! Entrando no AgroValor');
+      setTimeout(() => {
+        navigate('/property');
+      }, 2000);
     } catch (error) {
-      console.error('Error:', error);
+      toast.error(error.response.data.msg)
     }
   };
   return (
-    <UserContext.Provider value={{ email, password, name, setName, setEmail, setPassword, submitLogin: handleLogin, submitRegister: handleRegister }}>
+    <UserContext.Provider value={{ user, setUpdateUser, email, password, name, setName, setEmail, setPassword, submitLogin: handleLogin, submitRegister: handleRegister }}>
       {children}
     </UserContext.Provider>
   )

@@ -30,7 +30,7 @@ export default function UpdateBatchModal(data) {
     try {
       const PropertyRequest = await updateBatch(selectBatch, propertyState.id, name, activity)
       setUpdate(PropertyRequest)
-      toast.success('Propriedade excluida com sucesso')
+      toast.success('Lote atualizado com sucesso')
       setUpdateModalOpen(false);
     } catch (error) {
       toast.error(error.response.data.msg)
