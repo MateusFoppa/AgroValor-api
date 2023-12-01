@@ -19,11 +19,11 @@ export class CreatePropertys1694697490262 implements MigrationInterface {
           },
           {
             name: 'total_area',
-            type: 'int',
+            type: 'decimal',
           },
           {
             name: 'cultivated_area',
-            type: 'int',
+            type: 'decimal',
           },
           {
             name: 'city',
